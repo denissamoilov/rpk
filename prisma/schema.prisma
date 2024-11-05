@@ -1,0 +1,100 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator zod {
+  provider = "prisma-zod-generator"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String?   // For email/password auth
+  emailVerified DateTime?
+  image         String?
+  role          Role      @default(CLIENT)
+  companies     Company[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  agreedToTerms Boolean   @default(false) // New field to store agreement status
+  requestToken  String?   @db.Text
+  accessToken   String?   @db.Text
+}
+
+model Company {
+  id          String    @id @default(cuid())
+  name        String
+  regNumber   String    @unique // Registration number
+  vatNumber   String?   // VAT number if applicable
+  userId      String    
+  user        User      @relation(fields: [userId], references: [id])
+  invoices    Invoice[]
+  expenses    Expense[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Invoice {
+  id          String    @id @default(cuid())
+  number      String    // Invoice number
+  date        DateTime
+  dueDate     DateTime
+  companyId   String
+  company     Company   @relation(fields: [companyId], references: [id])
+  items       InvoiceItem[]
+  totalAmount Decimal   @db.Decimal(10, 2)
+  status      InvoiceStatus @default(DRAFT)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model InvoiceItem {
+  id          String  @id @default(cuid())
+  invoiceId   String
+  invoice     Invoice @relation(fields: [invoiceId], references: [id])
+  description String
+  quantity    Int
+  unitPrice   Decimal @db.Decimal(10, 2)
+  amount      Decimal @db.Decimal(10, 2)
+}
+
+model Expense {
+  id          String    @id @default(cuid())
+  date        DateTime
+  companyId   String
+  company     Company   @relation(fields: [companyId], references: [id])
+  category    ExpenseCategory
+  amount      Decimal   @db.Decimal(10, 2)
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+enum Role {
+  ADMIN
+  ACCOUNTANT
+  CLIENT
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum ExpenseCategory {
+  OFFICE
+  TRAVEL
+  EQUIPMENT
+  SALARY
+  TAX
+  OTHER
+} 

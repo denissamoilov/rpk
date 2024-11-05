@@ -1,0 +1,63 @@
+{
+  "Common": {
+    "or": "Or",
+    "continueWithGoogle": "Continue with Google",
+    "loading": "Loading..."
+  },
+  "Errors": {
+    "emailAlreadyExists": "This email is already registered",
+    "somethingWentWrong": "Something went wrong",
+    "nameTooShort": "Name must be at least 2 characters",
+    "invalidEmail": "Invalid email address",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "passwordRequired": "Password is required",
+    "emailRequired": "Email is required",
+    "agreeToTermsRequired": "You must agree to the terms and conditions",
+    "nameRequired": "Name is required"
+  },
+  "Buttons": {
+    "submit": "Submit"
+  },
+  "Index": {
+    "welcome": "Welcome",
+    "hello": "Hello, {name}!",
+    "login": "Login",
+    "createAccount": "Create Account"
+  },
+  "Auth": {
+    "LoginForm": {
+      "email": "Email",
+      "emailExample": "example@email.com",
+      "password": "Password",
+      "passwordExample": "********",
+      "login": "Login",
+      "rememberMe": "Remember me",
+      "noAccount": "Don't have an account?",
+      "register": "Sign up",
+      "forgotPassword": "Forgot password?"
+    },
+    "SignupForm": {
+      "email": "Email",
+      "emailExample": "example@email.com",
+      "password": "Password",
+      "passwordExample": "********",
+      "haveAccount": "Already have an account?",
+      "createAccount": "Create Account",
+      "name": "Name",
+      "nameExample": "John Doe",
+      "agreeToTerms": "I agree to the <termsLink>Terms of Service</termsLink>"
+    },
+    "ForgotPassword": {
+      "title": "Forgot Password",
+      "email": "Email",
+      "emailExample": "example@email.com"
+    },
+    "NewPassword": {
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "title": "New Password",
+      "passwordExample": "********",
+      "confirmPasswordExample": "********"
+    }
+  }
+}

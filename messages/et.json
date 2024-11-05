@@ -1,0 +1,63 @@
+{
+  "Common": {
+    "or": "Või",
+    "continueWithGoogle": "Jätka Google'iga",
+    "loading": "Laadimine..."
+  },
+  "Errors": {
+    "emailAlreadyExists": "See email on juba registreeritud",
+    "somethingWentWrong": "Midagi läks valesti",
+    "nameTooShort": "Nimi peab olema vähemalt 2 tähte",
+    "invalidEmail": "Vigane email",
+    "passwordTooShort": "Parool peab olema vähemalt 8 tähte",
+    "passwordRequired": "Parool on kohustuslik",
+    "emailRequired": "Email on kohustuslik",
+    "agreeToTermsRequired": "Te peate nõustuma teenuse tingimustega",
+    "nameRequired": "Nimi on kohustuslik"
+  },
+  "Buttons": {
+    "submit": "Saada"
+  },
+  "Index": {
+    "welcome": "Tere tulemast",
+    "hello": "Tere, {name}!",
+    "createAccount": "Loo konto",
+    "login": "Logi sisse"
+  },
+  "Auth": {
+    "LoginForm": {
+      "email": "Email",
+      "emailExample": "example@email.com",
+      "password": "Parool",
+      "passwordExample": "********",
+      "login": "Logi sisse",
+      "rememberMe": "Jäta mind sisse",
+      "noAccount": "Ei ole kontot?",
+      "register": "Registreeri",
+      "forgotPassword": "Unustasid parooli?"
+    },
+    "SignupForm": {
+      "email": "Email",
+      "emailExample": "example@email.com",
+      "password": "Parool",
+      "passwordExample": "********",
+      "haveAccount": "On konto?",
+      "createAccount": "Loo konto",
+      "name": "Nimi",
+      "nameExample": "John Doe",
+      "agreeToTerms": "Olen nõus <termsLink>Teenuse tingimustega</termsLink>"
+    },
+    "ForgotPassword": {
+      "title": "Unustasid parooli?",
+      "email": "Email",
+      "emailExample": "example@email.com"
+    },
+    "NewPassword": {
+      "password": "Parool",
+      "confirmPassword": "Kinnita parool",
+      "passwordExample": "********",
+      "confirmPasswordExample": "********",
+      "title": "Uus parool"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "Common": {
+    "or": "Или",
+    "continueWithGoogle": "Продолжить с Google",
+    "loading": "Загрузка..."
+  },
+  "Errors": {
+    "emailAlreadyExists": "Этот email уже зарегистрирован",
+    "somethingWentWrong": "Что-то пошло не так",
+    "nameTooShort": "Имя должно быть длиннее 2 символов",
+    "invalidEmail": "Неверный email",
+    "passwordTooShort": "Пароль должен быть длиннее 8 символов",
+    "passwordRequired": "Пароль обязателен",
+    "emailRequired": "Email обязателен",
+    "agreeToTermsRequired": "Вы должны согласиться с условиями использования",
+    "nameRequired": "Имя обязательно"
+  },
+  "Buttons": {
+    "submit": "Отправить"
+  },
+  "Index": {
+    "welcome": "Добро пожаловать",
+    "hello": "Привет, {name}!",
+    "createAccount": "Создать аккаунт",
+    "login": "Войти"
+  },
+  "Auth": {
+    "LoginForm": {
+      "email": "Email",
+      "emailExample": "example@email.com",
+      "password": "Пароль",
+      "passwordExample": "********",
+      "login": "Войти",
+      "rememberMe": "Запомнить меня",
+      "noAccount": "Нет аккаунта?",
+      "register": "Зарегистрируйся",
+      "forgotPassword": "Забыл пароль?"
+    },
+    "SignupForm": {
+      "email": "Email",
+      "emailExample": "example@email.com",
+      "password": "Пароль",
+      "passwordExample": "********",
+      "haveAccount": "Уже есть аккаунт?",
+      "createAccount": "Зарегистрироваться",
+      "name": "Имя",
+      "nameExample": "John Doe",
+      "agreeToTerms": "Я согласен с <termsLink>Условиями использования</termsLink>"
+    },
+    "ForgotPassword": {
+      "title": "Забыли пароль?",
+      "email": "Email",
+      "emailExample": "example@email.com"
+    },
+    "NewPassword": {
+      "password": "Пароль",
+      "confirmPassword": "Подтвердить пароль",
+      "passwordExample": "********",
+      "confirmPasswordExample": "********"
+    }
+  }
+}
