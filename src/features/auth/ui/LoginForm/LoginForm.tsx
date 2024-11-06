@@ -14,9 +14,14 @@ import { Checkbox } from "@/shared/ui/Checkbox/Checkbox";
 import { Separator } from "@/shared/ui/Separator/Separator";
 import { GoogleIcon } from "@/shared/icons/GoogleIcon";
 import { useLogin } from "../../api/login";
+import { trpc } from "@/app/_trpc/client";
+import { useUserStore } from "@/entities/user/model/store";
+import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
   const t = useTranslations();
+  const router = useRouter();
+  const setUser = useUserStore((state) => state.setUser);
   const loginSchema = useLoginSchema();
 
   const {
@@ -27,11 +32,16 @@ export const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const { mutateAsync: login, isLoading } = useLogin();
+  //   const { mutateAsync: login, isLoading } = useLogin();
+  const { mutateAsync: login, isLoading } = trpc.auth.login.useMutation();
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      await login(data);
+      const result = await login(data);
+      if (result.success) {
+        setUser({ ...result.user });
+        router.push("/in/");
+      }
     } catch (error) {
       console.error("Login failed:", error);
     }

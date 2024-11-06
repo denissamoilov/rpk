@@ -1,17 +1,13 @@
 "use client";
 
-import { useUserStore } from "@/entities/user/model/store";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 export function HomePage() {
   const t = useTranslations("Index");
-  const user = useUserStore((state) => state.user);
 
   return (
     <>
-      <h1 className="text-heading-1 text-center mb-6">
-        {user?.name ? t("hello", { name: user.name }) : t("welcome")}
-      </h1>
+      <h1 className="text-heading-1 text-center mb-6">{t("welcome")}</h1>
       <Link href="/login">{t("login")}</Link>
     </>
   );

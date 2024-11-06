@@ -31,7 +31,6 @@ export const SignupForm = () => {
     resolver: zodResolver(signupSchema),
   });
 
-  //   const { mutateAsync: signUp, isLoading } = useSignup();
   const { mutateAsync: signUp, isLoading } = trpc.auth.register.useMutation();
 
   const onSubmit = async (data: SignupFormData) => {

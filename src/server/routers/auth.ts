@@ -4,8 +4,10 @@ import { prisma } from "@/shared/lib/prisma";
 import { z } from "zod";
 
 export const authRouter = router({
-  login: publicProcedure.input(loginSchema).mutation(async ({ input }) => {
+  login: publicProcedure.input(loginSchema).mutation(async ({ input, ctx }) => {
     const { email, password } = input;
+
+    console.log("ctx", ctx);
 
     const user = await prisma.user.findUnique({
       where: { email },
@@ -16,30 +18,32 @@ export const authRouter = router({
 
     console.log("user", user);
 
-    return { message: "Login successful", user };
+    return { message: "Login successful", success: true, user };
   }),
-  register: publicProcedure.input(signUpSchema).mutation(async ({ input }) => {
-    const { name, email, password, agreedToTerms } = input;
+  register: publicProcedure
+    .input(signUpSchema)
+    .mutation(async ({ input, ctx }) => {
+      const { name, email, password, agreedToTerms } = input;
 
-    console.log("prisma", prisma);
+      console.log("prisma", prisma);
 
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
-    });
+      const existingUser = await prisma.user.findUnique({
+        where: { email },
+      });
 
-    if (existingUser) {
-      throw new Error("User already exists");
-    }
+      if (existingUser) {
+        throw new Error("User already exists");
+      }
 
-    // Create new user
-    const newUser = await prisma.user.create({
-      data: { email, password, name, agreedToTerms },
-    });
+      // Create new user
+      const newUser = await prisma.user.create({
+        data: { email, password, name, agreedToTerms },
+      });
 
-    return {
-      message: "User created successfully",
-      success: true,
-      user: newUser,
-    };
-  }),
+      return {
+        message: "User created successfully",
+        success: true,
+        user: newUser,
+      };
+    }),
 });
