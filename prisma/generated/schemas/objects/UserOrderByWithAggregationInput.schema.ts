@@ -39,6 +39,18 @@ const Schema: z.ZodType<Prisma.UserOrderByWithAggregationInput> = z
     createdAt: z.lazy(() => SortOrderSchema).optional(),
     updatedAt: z.lazy(() => SortOrderSchema).optional(),
     agreedToTerms: z.lazy(() => SortOrderSchema).optional(),
+    requestToken: z
+      .union([
+        z.lazy(() => SortOrderSchema),
+        z.lazy(() => SortOrderInputObjectSchema),
+      ])
+      .optional(),
+    accessToken: z
+      .union([
+        z.lazy(() => SortOrderSchema),
+        z.lazy(() => SortOrderInputObjectSchema),
+      ])
+      .optional(),
     _count: z.lazy(() => UserCountOrderByAggregateInputObjectSchema).optional(),
     _max: z.lazy(() => UserMaxOrderByAggregateInputObjectSchema).optional(),
     _min: z.lazy(() => UserMinOrderByAggregateInputObjectSchema).optional(),

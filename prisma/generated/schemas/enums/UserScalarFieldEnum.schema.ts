@@ -11,4 +11,6 @@ export const UserScalarFieldEnumSchema = z.enum([
   'createdAt',
   'updatedAt',
   'agreedToTerms',
+  'requestToken',
+  'accessToken',
 ]);

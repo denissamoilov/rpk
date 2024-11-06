@@ -37,6 +37,18 @@ const Schema: z.ZodType<Prisma.UserOrderByWithRelationInput> = z
     createdAt: z.lazy(() => SortOrderSchema).optional(),
     updatedAt: z.lazy(() => SortOrderSchema).optional(),
     agreedToTerms: z.lazy(() => SortOrderSchema).optional(),
+    requestToken: z
+      .union([
+        z.lazy(() => SortOrderSchema),
+        z.lazy(() => SortOrderInputObjectSchema),
+      ])
+      .optional(),
+    accessToken: z
+      .union([
+        z.lazy(() => SortOrderSchema),
+        z.lazy(() => SortOrderInputObjectSchema),
+      ])
+      .optional(),
     companies: z
       .lazy(() => CompanyOrderByRelationAggregateInputObjectSchema)
       .optional(),

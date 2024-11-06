@@ -76,6 +76,20 @@ const Schema: z.ZodType<Prisma.UserUncheckedUpdateInput> = z
         z.lazy(() => BoolFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
+    requestToken: z
+      .union([
+        z.string(),
+        z.lazy(() => NullableStringFieldUpdateOperationsInputObjectSchema),
+      ])
+      .optional()
+      .nullable(),
+    accessToken: z
+      .union([
+        z.string(),
+        z.lazy(() => NullableStringFieldUpdateOperationsInputObjectSchema),
+      ])
+      .optional()
+      .nullable(),
     companies: z
       .lazy(() => CompanyUncheckedUpdateManyWithoutUserNestedInputObjectSchema)
       .optional(),

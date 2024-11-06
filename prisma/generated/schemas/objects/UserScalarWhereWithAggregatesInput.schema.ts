@@ -82,6 +82,20 @@ const Schema: z.ZodType<Prisma.UserScalarWhereWithAggregatesInput> = z
     agreedToTerms: z
       .union([z.lazy(() => BoolWithAggregatesFilterObjectSchema), z.boolean()])
       .optional(),
+    requestToken: z
+      .union([
+        z.lazy(() => StringNullableWithAggregatesFilterObjectSchema),
+        z.string(),
+      ])
+      .optional()
+      .nullable(),
+    accessToken: z
+      .union([
+        z.lazy(() => StringNullableWithAggregatesFilterObjectSchema),
+        z.string(),
+      ])
+      .optional()
+      .nullable(),
   })
   .strict();
 

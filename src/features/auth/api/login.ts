@@ -1,19 +1,17 @@
-import { api } from "@/shared/api/base";
-import { User } from "@/entities/user/model/types";
+// import { User } from "@/entities/user/model/types";
 import { useUserStore } from "@/entities/user/model/store";
 import { useMutation } from "@tanstack/react-query";
-
-interface LoginDTO {
-  email: string;
-  password: string;
-}
+import { trpc } from "@/app/_trpc/client";
+import { LoginFormData } from "../model/schemas";
 
 export const useLogin = () => {
   const setUser = useUserStore((state) => state.setUser);
 
+  console.log("useLogin");
+
   return useMutation({
-    mutationFn: (data: LoginDTO) =>
-      api.post<User>("/auth/login", data).then((res) => res.data),
+    mutationFn: (data: LoginFormData) =>
+      trpc.auth.login.useMutation().mutateAsync(data),
     onSuccess: (user) => {
       setUser(user);
     },

@@ -5,13 +5,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/shared/ui/Button/Button";
 import { Input } from "@/shared/ui/Input/Input";
-import { useLoginSchema, type LoginFormData } from "../../model/schemas";
-import { trpc } from "@/shared/api/trpc";
+import {
+  useLoginSchema,
+  type LoginFormData,
+} from "@/features/auth/model/schemas";
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/shared/ui/Checkbox/Checkbox";
 import { Separator } from "@/shared/ui/Separator/Separator";
 import { GoogleIcon } from "@/shared/icons/GoogleIcon";
-import { ArrowRightIcon } from "lucide-react";
+import { useLogin } from "../../api/login";
 
 export const LoginForm = () => {
   const t = useTranslations();
@@ -25,11 +27,11 @@ export const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const login = trpc.auth.login.useMutation();
+  const { mutateAsync: login, isLoading } = useLogin();
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      await login.mutateAsync(data);
+      await login(data);
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -62,11 +64,11 @@ export const LoginForm = () => {
         </div>
         <Button
           type="submit"
-          disabled={isSubmitting || login.isLoading}
+          disabled={isSubmitting || isLoading}
           size="lg"
-          isLoading={isSubmitting || login.isLoading}
+          isLoading={isSubmitting || isLoading}
         >
-          {isSubmitting || login.isLoading
+          {isSubmitting || isLoading
             ? t("Common.loading")
             : t("Auth.LoginForm.login")}
         </Button>

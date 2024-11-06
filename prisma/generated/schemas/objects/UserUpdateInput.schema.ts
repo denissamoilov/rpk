@@ -76,6 +76,20 @@ const Schema: z.ZodType<Prisma.UserUpdateInput> = z
         z.lazy(() => BoolFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
+    requestToken: z
+      .union([
+        z.string(),
+        z.lazy(() => NullableStringFieldUpdateOperationsInputObjectSchema),
+      ])
+      .optional()
+      .nullable(),
+    accessToken: z
+      .union([
+        z.string(),
+        z.lazy(() => NullableStringFieldUpdateOperationsInputObjectSchema),
+      ])
+      .optional()
+      .nullable(),
     companies: z
       .lazy(() => CompanyUpdateManyWithoutUserNestedInputObjectSchema)
       .optional(),

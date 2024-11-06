@@ -5,13 +5,14 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/shared/ui/Button/Button";
-import { useSignupSchema, type SignupFormData } from "../../model/schemas";
-import { trpc } from "@/shared/api/trpc";
 import { Input } from "@/shared/ui/Input/Input";
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/shared/ui/Checkbox/Checkbox";
 import { GoogleIcon } from "@/shared/icons/GoogleIcon";
 import { Separator } from "@/shared/ui/Separator/Separator";
+import { useSignupSchema } from "../../model/schemas";
+import { SignupFormData } from "../../model/schemas";
+import { useSignup } from "../../api/signup";
 
 export const SignupForm = () => {
   const t = useTranslations();
@@ -27,18 +28,17 @@ export const SignupForm = () => {
     resolver: zodResolver(signupSchema),
   });
 
-  const signup = trpc.auth.register.useMutation();
+  const { mutateAsync: signup, isLoading } = useSignup();
 
   const onSubmit = async (data: SignupFormData) => {
-    console.log("Form Data:", data);
-
     const processedData = {
       ...data,
-      agreeToTerms: data.agreeToTerms === "true",
+      //   agreeToTerms: data.agreeToTerms === "true",
     };
 
     try {
-      const result = await signup.mutateAsync(processedData);
+      //   const result = await signup.mutateAsync(processedData);
+      const result = await signup(processedData);
       if (result.success) {
         router.push("/"); // Redirect to login page after successful signup
       }
@@ -129,11 +129,11 @@ export const SignupForm = () => {
 
         <Button
           type="submit"
-          disabled={isSubmitting || signup.isLoading}
-          isLoading={isSubmitting || signup.isLoading}
+          disabled={isSubmitting || isLoading}
+          isLoading={isSubmitting || isLoading}
           size="lg"
         >
-          {isSubmitting || signup.isLoading
+          {isSubmitting || isLoading
             ? t("Common.loading")
             : t("Auth.SignupForm.createAccount")}
         </Button>

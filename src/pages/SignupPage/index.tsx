@@ -1,6 +1,5 @@
-import { SignupForm } from "@/features/auth/ui/SignupForm/SignupForm";
 import { useTranslations } from "next-intl";
-
+import { SignupForm } from "@/features/auth/ui/SignupForm/SignupForm";
 export function SignupPage() {
   const t = useTranslations("Index");
 

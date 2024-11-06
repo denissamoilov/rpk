@@ -15,6 +15,8 @@ const Schema: z.ZodType<Prisma.UserUncheckedCreateWithoutCompaniesInput> = z
     createdAt: z.coerce.date().optional(),
     updatedAt: z.coerce.date().optional(),
     agreedToTerms: z.boolean().optional(),
+    requestToken: z.string().optional().nullable(),
+    accessToken: z.string().optional().nullable(),
   })
   .strict();
 

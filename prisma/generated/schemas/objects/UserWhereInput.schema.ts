@@ -68,6 +68,14 @@ const Schema: z.ZodType<Prisma.UserWhereInput> = z
     agreedToTerms: z
       .union([z.lazy(() => BoolFilterObjectSchema), z.boolean()])
       .optional(),
+    requestToken: z
+      .union([z.lazy(() => StringNullableFilterObjectSchema), z.string()])
+      .optional()
+      .nullable(),
+    accessToken: z
+      .union([z.lazy(() => StringNullableFilterObjectSchema), z.string()])
+      .optional()
+      .nullable(),
     companies: z.lazy(() => CompanyListRelationFilterObjectSchema).optional(),
   })
   .strict();
