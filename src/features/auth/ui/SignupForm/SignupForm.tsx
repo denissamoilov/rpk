@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/shared/ui/Button/Button";
 import { Input } from "@/shared/ui/Input/Input";
@@ -26,6 +26,7 @@ export const SignupForm = () => {
     register,
     handleSubmit,
     setError,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
@@ -34,16 +35,8 @@ export const SignupForm = () => {
   const { mutateAsync: signUp, isLoading } = trpc.auth.register.useMutation();
 
   const onSubmit = async (data: SignupFormData) => {
-    console.log("data  ::", data);
-
-    const processedData = {
-      ...data,
-      //   agreedToTerms: data.agreedToTerms === "true",
-    };
-
     try {
-      //   const result = await signup.mutateAsync(processedData);
-      const result = await signUp(processedData);
+      const result = await signUp(data);
       if (result.success) {
         setUser({ ...result.user, status: "active" });
         router.push("/"); // Redirect to login page after successful signup
@@ -119,18 +112,26 @@ export const SignupForm = () => {
           label={t("Auth.SignupForm.password")}
           size="lg"
         />
-
-        <Checkbox
-          {...register("agreedToTerms", {
-            required: t("Errors.agreeToTermsRequired"),
-          })}
-          error={errors.agreedToTerms?.message}
-          id="agreedToTerms"
-          label={t.rich("Auth.SignupForm.agreeToTerms", {
-            termsLink: (chunks) => (
-              <Link href="/terms-and-conditions">{chunks}</Link>
-            ),
-          })}
+        <Controller
+          control={control}
+          name={`agreedToTerms`}
+          //   defaultValue={"false"}
+          render={({ field: { onChange, value } }) => {
+            console.log("value", value);
+            return (
+              <Checkbox
+                onCheckedChange={onChange}
+                checked={value === true}
+                error={errors.agreedToTerms?.message}
+                id="agreedToTerms"
+                label={t.rich("Auth.SignupForm.agreeToTerms", {
+                  termsLink: (chunks) => (
+                    <Link href="/terms-and-conditions">{chunks}</Link>
+                  ),
+                })}
+              />
+            );
+          }}
         />
 
         <Button

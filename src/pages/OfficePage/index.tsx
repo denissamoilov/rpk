@@ -10,7 +10,7 @@ export function OfficePage() {
   return (
     <>
       <h1 className="text-heading-1 text-center mb-6">
-        {user?.name ? t("hello", { name: user.name }) : t("welcome")}
+        {user?.name && t("hello", { name: user.name })}
       </h1>
     </>
   );

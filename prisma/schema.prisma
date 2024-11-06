@@ -23,7 +23,7 @@ model User {
   companies     Company[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  agreedToTerms String?   @default("false") // New field to store agreement status
+  agreedToTerms Boolean   @default(false) // New field to store agreement status
   requestToken  String?   @db.Text
   accessToken   String?   @db.Text
 }

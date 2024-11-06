@@ -27,7 +27,9 @@ export const signUpSchema = z.object({
   name: z.string(),
   email: z.string(),
   password: z.string(),
-  agreedToTerms: z.string().optional(),
+  agreedToTerms: z.boolean().refine((v) => v === true, {
+    message: "You must agree to the terms and conditions",
+  }),
 });
 
 export const useSignupSchema = () => {
@@ -41,10 +43,9 @@ export const useSignupSchema = () => {
     name: z
       .string()
       .min(2, { message: "Name must be at least 2 characters long" }),
-    agreedToTerms: z.string().optional(),
-    // agreedToTerms: z.string().refine((v) => v === "true", {
-    //   message: t("Errors.agreeToTermsRequired"),
-    // }),
+    agreedToTerms: z.boolean().refine((v) => v === true, {
+      message: "You must agree to the terms and conditions",
+    }),
   });
 };
 

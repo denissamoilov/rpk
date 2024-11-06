@@ -5,6 +5,7 @@ import { DateTimeNullableWithAggregatesFilterObjectSchema } from './DateTimeNull
 import { EnumRoleWithAggregatesFilterObjectSchema } from './EnumRoleWithAggregatesFilter.schema';
 import { RoleSchema } from '../enums/Role.schema';
 import { DateTimeWithAggregatesFilterObjectSchema } from './DateTimeWithAggregatesFilter.schema';
+import { BoolWithAggregatesFilterObjectSchema } from './BoolWithAggregatesFilter.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -79,12 +80,8 @@ const Schema: z.ZodType<Prisma.UserScalarWhereWithAggregatesInput> = z
       ])
       .optional(),
     agreedToTerms: z
-      .union([
-        z.lazy(() => StringNullableWithAggregatesFilterObjectSchema),
-        z.string(),
-      ])
-      .optional()
-      .nullable(),
+      .union([z.lazy(() => BoolWithAggregatesFilterObjectSchema), z.boolean()])
+      .optional(),
     requestToken: z
       .union([
         z.lazy(() => StringNullableWithAggregatesFilterObjectSchema),

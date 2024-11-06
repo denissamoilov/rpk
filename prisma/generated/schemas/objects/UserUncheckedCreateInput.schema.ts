@@ -15,7 +15,7 @@ const Schema: z.ZodType<Prisma.UserUncheckedCreateInput> = z
     role: z.lazy(() => RoleSchema).optional(),
     createdAt: z.coerce.date().optional(),
     updatedAt: z.coerce.date().optional(),
-    agreedToTerms: z.string().optional().nullable(),
+    agreedToTerms: z.boolean().optional(),
     requestToken: z.string().optional().nullable(),
     accessToken: z.string().optional().nullable(),
     companies: z
