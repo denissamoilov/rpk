@@ -38,7 +38,12 @@ const Schema: z.ZodType<Prisma.UserOrderByWithAggregationInput> = z
     role: z.lazy(() => SortOrderSchema).optional(),
     createdAt: z.lazy(() => SortOrderSchema).optional(),
     updatedAt: z.lazy(() => SortOrderSchema).optional(),
-    agreedToTerms: z.lazy(() => SortOrderSchema).optional(),
+    agreedToTerms: z
+      .union([
+        z.lazy(() => SortOrderSchema),
+        z.lazy(() => SortOrderInputObjectSchema),
+      ])
+      .optional(),
     requestToken: z
       .union([
         z.lazy(() => SortOrderSchema),

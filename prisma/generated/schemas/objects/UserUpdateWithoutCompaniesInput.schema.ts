@@ -5,7 +5,6 @@ import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './Nullab
 import { RoleSchema } from '../enums/Role.schema';
 import { EnumRoleFieldUpdateOperationsInputObjectSchema } from './EnumRoleFieldUpdateOperationsInput.schema';
 import { DateTimeFieldUpdateOperationsInputObjectSchema } from './DateTimeFieldUpdateOperationsInput.schema';
-import { BoolFieldUpdateOperationsInputObjectSchema } from './BoolFieldUpdateOperationsInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -71,10 +70,11 @@ const Schema: z.ZodType<Prisma.UserUpdateWithoutCompaniesInput> = z
       .optional(),
     agreedToTerms: z
       .union([
-        z.boolean(),
-        z.lazy(() => BoolFieldUpdateOperationsInputObjectSchema),
+        z.string(),
+        z.lazy(() => NullableStringFieldUpdateOperationsInputObjectSchema),
       ])
-      .optional(),
+      .optional()
+      .nullable(),
     requestToken: z
       .union([
         z.string(),

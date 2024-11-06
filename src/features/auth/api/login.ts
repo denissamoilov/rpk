@@ -13,7 +13,7 @@ export const useLogin = () => {
     mutationFn: (data: LoginFormData) =>
       trpc.auth.login.useMutation().mutateAsync(data),
     onSuccess: (user) => {
-      setUser(user);
+      setUser({ ...user.user });
     },
   });
 };

@@ -12,11 +12,14 @@ import { GoogleIcon } from "@/shared/icons/GoogleIcon";
 import { Separator } from "@/shared/ui/Separator/Separator";
 import { useSignupSchema } from "../../model/schemas";
 import { SignupFormData } from "../../model/schemas";
+import { trpc } from "@/app/_trpc/client";
 import { useSignup } from "../../api/signup";
+import { useUserStore } from "@/entities/user/model/store";
 
 export const SignupForm = () => {
   const t = useTranslations();
   const signupSchema = useSignupSchema();
+  const setUser = useUserStore((state) => state.setUser);
 
   const router = useRouter();
   const {
@@ -28,18 +31,22 @@ export const SignupForm = () => {
     resolver: zodResolver(signupSchema),
   });
 
-  const { mutateAsync: signup, isLoading } = useSignup();
+  //   const { mutateAsync: signUp, isLoading } = useSignup();
+  const { mutateAsync: signUp, isLoading } = trpc.auth.register.useMutation();
 
   const onSubmit = async (data: SignupFormData) => {
+    console.log("data  ::", data);
+
     const processedData = {
       ...data,
-      //   agreeToTerms: data.agreeToTerms === "true",
+      //   agreedToTerms: data.agreedToTerms === "true",
     };
 
     try {
       //   const result = await signup.mutateAsync(processedData);
-      const result = await signup(processedData);
+      const result = await signUp(processedData);
       if (result.success) {
+        setUser({ ...result.user, status: "active" });
         router.push("/"); // Redirect to login page after successful signup
       }
     } catch (error: unknown) {
@@ -50,6 +57,7 @@ export const SignupForm = () => {
             message: t("Errors.emailAlreadyExists"),
           });
         } else {
+          console.log("error  ::", error);
           setError("root", {
             type: "manual",
             message: t("Errors.somethingWentWrong"),
@@ -114,12 +122,11 @@ export const SignupForm = () => {
         />
 
         <Checkbox
-          {...register("agreeToTerms", {
+          {...register("agreedToTerms", {
             required: t("Errors.agreeToTermsRequired"),
           })}
-          value="true"
-          error={errors.agreeToTerms?.message}
-          id="agreeToTerms"
+          error={errors.agreedToTerms?.message}
+          id="agreedToTerms"
           label={t.rich("Auth.SignupForm.agreeToTerms", {
             termsLink: (chunks) => (
               <Link href="/terms-and-conditions">{chunks}</Link>

@@ -5,7 +5,6 @@ import { DateTimeNullableFilterObjectSchema } from './DateTimeNullableFilter.sch
 import { EnumRoleFilterObjectSchema } from './EnumRoleFilter.schema';
 import { RoleSchema } from '../enums/Role.schema';
 import { DateTimeFilterObjectSchema } from './DateTimeFilter.schema';
-import { BoolFilterObjectSchema } from './BoolFilter.schema';
 import { CompanyListRelationFilterObjectSchema } from './CompanyListRelationFilter.schema';
 
 import type { Prisma } from '@prisma/client';
@@ -66,8 +65,9 @@ const Schema: z.ZodType<Prisma.UserWhereInput> = z
       .union([z.lazy(() => DateTimeFilterObjectSchema), z.coerce.date()])
       .optional(),
     agreedToTerms: z
-      .union([z.lazy(() => BoolFilterObjectSchema), z.boolean()])
-      .optional(),
+      .union([z.lazy(() => StringNullableFilterObjectSchema), z.string()])
+      .optional()
+      .nullable(),
     requestToken: z
       .union([z.lazy(() => StringNullableFilterObjectSchema), z.string()])
       .optional()

@@ -1,6 +1,7 @@
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
 }
 
 generator client {
@@ -22,7 +23,7 @@ model User {
   companies     Company[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  agreedToTerms Boolean   @default(false) // New field to store agreement status
+  agreedToTerms String?   @default("false") // New field to store agreement status
   requestToken  String?   @db.Text
   accessToken   String?   @db.Text
 }
