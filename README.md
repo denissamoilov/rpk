@@ -39,7 +39,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 This project follows the Feature-Sliced Design (FSD) methodology:
 
-```src/
+src/
 ├── app/          # Next.js app router pages
 ├── shared/       # Reusable components, utils, types
 │   ├── api/

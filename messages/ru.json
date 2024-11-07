@@ -4,6 +4,12 @@
     "continueWithGoogle": "Продолжить с Google",
     "loading": "Загрузка..."
   },
+  "LanguageSelector": {
+    "languageSelector": "Выберите язык",
+    "english": "Английский",
+    "estonian": "Эстонский",
+    "russian": "Русский"
+  },
   "Errors": {
     "emailAlreadyExists": "Этот email уже зарегистрирован",
     "somethingWentWrong": "Что-то пошло не так",

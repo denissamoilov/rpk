@@ -4,6 +4,12 @@
     "continueWithGoogle": "Jätka Google'iga",
     "loading": "Laadimine..."
   },
+  "LanguageSelector": {
+    "languageSelector": "Vali keel",
+    "english": "Inglise",
+    "estonian": "Eesti",
+    "russian": "Vene"
+  },
   "Errors": {
     "emailAlreadyExists": "See email on juba registreeritud",
     "somethingWentWrong": "Midagi läks valesti",

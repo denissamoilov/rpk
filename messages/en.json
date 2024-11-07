@@ -4,6 +4,12 @@
     "continueWithGoogle": "Continue with Google",
     "loading": "Loading..."
   },
+  "LanguageSelector": {
+    "languageSelector": "Select Language",
+    "english": "English",
+    "estonian": "Estonian",
+    "russian": "Russian"
+  },
   "Errors": {
     "emailAlreadyExists": "This email is already registered",
     "somethingWentWrong": "Something went wrong",
