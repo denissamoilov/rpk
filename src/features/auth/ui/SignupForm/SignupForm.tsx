@@ -60,7 +60,7 @@ export const SignupForm = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-full">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         {errors.root && (
           <div className="text-red-500 text-sm text-center">
