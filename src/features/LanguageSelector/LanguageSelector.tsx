@@ -5,7 +5,7 @@ import { useAppStore } from "@/entities/app/model/store";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { Select, SelectProps } from "@/shared/ui/Select/Select";
-export const LanguageSelector = (props: SelectProps) => {
+export const LanguageSelector = () => {
   const t = useTranslations("LanguageSelector");
   const locale = useLocale();
   const { language, setLanguage } = useAppStore();
@@ -32,7 +32,7 @@ export const LanguageSelector = (props: SelectProps) => {
 
   return (
     <Select
-      {...props}
+      className="w-auto"
       size="sm"
       options={[
         { value: "en", label: t("english") },
