@@ -1,4 +1,5 @@
 import { TrpcProvider } from "@/app/_trpc/TrpcProvider";
+import { LanguageSelector } from "@/features/LanguageSelector/LanguageSelector";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -18,6 +19,7 @@ export default function AuthLayout({
           <div className="w-full h-full flex flex-col justify-center">
             {children}
           </div>
+          <LanguageSelector className="w-auto" />
         </main>
         <div
           className={cn(
