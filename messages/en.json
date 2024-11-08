@@ -64,6 +64,12 @@
       "title": "New Password",
       "passwordExample": "********",
       "confirmPasswordExample": "********"
+    },
+    "CompletePage": {
+      "emailSent": "Email Sent",
+      "checkInbox": "Check your inbox for the verification email",
+      "resendEmail": "Resend Email",
+      "goToHome": "Go to Home"
     }
   }
 }

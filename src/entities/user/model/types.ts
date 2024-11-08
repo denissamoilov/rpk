@@ -5,6 +5,7 @@ export interface User {
   avatar?: string;
   role: "user" | "admin";
   createdAt: string;
+  requestToken?: string;
 }
 
 export type Status = "active" | "inactive" | "pending";
