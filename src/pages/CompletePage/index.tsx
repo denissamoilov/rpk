@@ -12,31 +12,34 @@ export default function CompletePage() {
   const t = useTranslations("Auth.CompletePage");
   const { user } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
+  const [shouldFetchToken, setShouldFetchToken] = useState(false);
+
+  const {
+    data: requestToken,
+    isLoading: isRequestTokenLoading,
+    error,
+  } = trpc.auth.getRequestToken.useQuery(
+    { id: user!.id },
+    {
+      enabled: shouldFetchToken && !!user,
+      onSuccess: (data) => {
+        sendEmail({ token: data, email: user!.email }).then(() => {
+          setIsLoading(false);
+          setShouldFetchToken(false);
+        });
+      },
+      onError: (err) => {
+        console.error("Error fetching request token:", err);
+        setIsLoading(false);
+        setShouldFetchToken(false);
+      },
+    }
+  );
 
   const handleResendEmail = useCallback(() => {
     if (!user) return;
-
     setIsLoading(true);
-
-    const { data: requestToken, isLoading: isRequestTokenLoading } =
-      trpc.auth.getRequestToken.useQuery(
-        {
-          id: user.id,
-        },
-        {
-          enabled: !!user, // Ensure the query only runs if the user exists
-          onSuccess: (data) => {
-            // Send the email once the token is successfully fetched
-            sendEmail({ token: data, email: user.email }).then(() => {
-              setIsLoading(false);
-            });
-          },
-          onError: (err) => {
-            console.error("Error fetching request token:", err);
-            setIsLoading(false);
-          },
-        }
-      );
+    setShouldFetchToken(true);
   }, [user]);
 
   return (
@@ -55,9 +58,6 @@ export default function CompletePage() {
         {t("resendEmail")}
       </Button>
       <Link href="/">{t("goToHome")}</Link>
-      {/* <Button variant="secondary" size="md" onClick={() => router.push("/")}>
-        {t("goToHome")}
-      </Button> */}
     </div>
   );
 }
