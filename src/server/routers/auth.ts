@@ -70,4 +70,23 @@ export const authRouter = router({
       const user = await prisma.user.findUnique({ where: { id } });
       return user?.requestToken;
     }),
+  confirmEmail: publicProcedure
+    .input(z.object({ id: z.string(), token: z.string() }))
+    .mutation(async ({ input }) => {
+      const { id, token } = input;
+
+      const user = await prisma.user.findUnique({ where: { id } });
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      if (user.requestToken !== token) {
+        throw new Error("Invalid token");
+      }
+
+      await prisma.user.update({
+        where: { id },
+        data: { emailVerified: new Date() },
+      });
+    }),
 });

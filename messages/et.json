@@ -70,6 +70,10 @@
       "checkInbox": "Kontrolli oma postkasti verifitseerimisemaili",
       "resendEmail": "Saada email uuesti",
       "goToHome": "Mine kodulehele"
+    },
+    "ConfirmEmailPage": {
+      "congratulations": "Täname",
+      "emailConfirmed": "Teie email on kinnitatud"
     }
   }
 }

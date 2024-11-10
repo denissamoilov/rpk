@@ -23,7 +23,11 @@ export default function CompletePage() {
     {
       enabled: shouldFetchToken && !!user,
       onSuccess: (data) => {
-        sendEmail({ token: data, email: user!.email }).then(() => {
+        sendEmail({
+          token: data,
+          uid: user!.id,
+          email: user!.email,
+        }).then(() => {
           setIsLoading(false);
           setShouldFetchToken(false);
         });

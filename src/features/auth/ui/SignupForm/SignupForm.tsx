@@ -46,7 +46,11 @@ export const SignupForm = () => {
 
         await generateToken({ id: result.user.id }, "24h").then((token) => {
           setRequestToken({ id: result.user.id, token }).then(() => {
-            sendEmail({ token, email: result.user.email }).then(() => {
+            sendEmail({
+              token,
+              uid: result.user.id,
+              email: result.user.email,
+            }).then(() => {
               router.push("/complete");
             });
           });
