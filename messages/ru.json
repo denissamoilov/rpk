@@ -63,6 +63,16 @@
       "confirmPassword": "Подтвердить пароль",
       "passwordExample": "********",
       "confirmPasswordExample": "********"
+    },
+    "CompletePage": {
+      "emailSent": "Email отправлен",
+      "checkInbox": "Проверьте свою почту на подтверждение email",
+      "resendEmail": "Отправить email снова",
+      "goToHome": "Перейти на главную"
+    },
+    "ConfirmEmailPage": {
+      "congratulations": "Поздравляем",
+      "emailConfirmed": "Ваш email подтвержден"
     }
   }
 }

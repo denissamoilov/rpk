@@ -13,8 +13,9 @@ import { Separator } from "@/shared/ui/Separator/Separator";
 import { useSignupSchema } from "../../model/schemas";
 import { SignupFormData } from "../../model/schemas";
 import { trpc } from "@/app/_trpc/client";
-import { useSignup } from "../../api/signup";
 import { useUserStore } from "@/entities/user/model/store";
+import { generateToken } from "@/server/jwt";
+import { sendEmail } from "@/shared/utils/emails";
 
 export const SignupForm = () => {
   const t = useTranslations();
@@ -32,14 +33,28 @@ export const SignupForm = () => {
     resolver: zodResolver(signupSchema),
   });
 
-  const { mutateAsync: signUp, isLoading } = trpc.auth.register.useMutation();
+  const { mutateAsync: signUp, isLoading: isSignUpLoading } =
+    trpc.auth.register.useMutation();
+  const { mutateAsync: setRequestToken, isLoading: isSetRequestTokenLoading } =
+    trpc.auth.setRequestToken.useMutation();
 
   const onSubmit = async (data: SignupFormData) => {
     try {
       const result = await signUp(data);
       if (result.success) {
-        setUser({ ...result.user, status: "active" });
-        router.push("/"); // Redirect to login page after successful signup
+        setUser(result.user);
+
+        await generateToken({ id: result.user.id }, "24h").then((token) => {
+          setRequestToken({ id: result.user.id, token }).then(() => {
+            sendEmail({
+              token,
+              uid: result.user.id,
+              email: result.user.email,
+            }).then(() => {
+              router.push("/complete");
+            });
+          });
+        });
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -115,32 +130,28 @@ export const SignupForm = () => {
         <Controller
           control={control}
           name={`agreedToTerms`}
-          //   defaultValue={"false"}
-          render={({ field: { onChange, value } }) => {
-            console.log("value", value);
-            return (
-              <Checkbox
-                onCheckedChange={onChange}
-                checked={value === true}
-                error={errors.agreedToTerms?.message}
-                id="agreedToTerms"
-                label={t.rich("Auth.SignupForm.agreeToTerms", {
-                  termsLink: (chunks) => (
-                    <Link href="/terms-and-conditions">{chunks}</Link>
-                  ),
-                })}
-              />
-            );
-          }}
+          render={({ field: { onChange, value } }) => (
+            <Checkbox
+              onCheckedChange={onChange}
+              checked={value === true}
+              error={errors.agreedToTerms?.message}
+              id="agreedToTerms"
+              label={t.rich("Auth.SignupForm.agreeToTerms", {
+                termsLink: (chunks) => (
+                  <Link href="/terms-and-conditions">{chunks}</Link>
+                ),
+              })}
+            />
+          )}
         />
 
         <Button
           type="submit"
-          disabled={isSubmitting || isLoading}
-          isLoading={isSubmitting || isLoading}
+          disabled={isSubmitting || isSignUpLoading}
+          isLoading={isSubmitting || isSignUpLoading}
           size="lg"
         >
-          {isSubmitting || isLoading
+          {isSubmitting || isSignUpLoading
             ? t("Common.loading")
             : t("Auth.SignupForm.createAccount")}
         </Button>
