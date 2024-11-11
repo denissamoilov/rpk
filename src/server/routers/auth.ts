@@ -2,9 +2,8 @@ import { loginSchema, signUpSchema } from "@/features/auth/model/schemas";
 import { router, publicProcedure } from "../trpc";
 import { prisma } from "@/shared/lib/prisma";
 import { z } from "zod";
-import { User } from "@/entities/user/model/types";
 import { createSession } from "@/server/jwt";
-import { sendEmail } from "@/shared/utils/emails";
+
 export const authRouter = router({
   login: publicProcedure.input(loginSchema).mutation(async ({ input, ctx }) => {
     const { email, password } = input;
