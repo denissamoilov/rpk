@@ -1,4 +1,4 @@
-import CompletePage from "@/pages/CompletePage";
+import CompletePage from "@/pages/CompletePage/CompletePage";
 import { setRequestLocale } from "next-intl/server";
 
 export default function Page({

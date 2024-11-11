@@ -3,7 +3,8 @@ import { router, publicProcedure } from "../trpc";
 import { prisma } from "@/shared/lib/prisma";
 import { z } from "zod";
 import { User } from "@/entities/user/model/types";
-
+import { createSession } from "@/server/jwt";
+import { sendEmail } from "@/shared/utils/emails";
 export const authRouter = router({
   login: publicProcedure.input(loginSchema).mutation(async ({ input, ctx }) => {
     const { email, password } = input;
@@ -21,7 +22,7 @@ export const authRouter = router({
 
     return { message: "Login successful", success: true, user };
   }),
-  register: publicProcedure
+  signup: publicProcedure
     .input(signUpSchema)
     .mutation(async ({ input, ctx }) => {
       const { name, email, password, agreedToTerms } = input;
@@ -34,15 +35,30 @@ export const authRouter = router({
         throw new Error("User already exists");
       }
 
+      if (!agreedToTerms) {
+        throw new Error("You must agree to the terms and conditions");
+      }
+
+      if (password.length < 8) {
+        throw new Error("Password must be at least 8 characters long");
+      }
+
       // Create new user
       const newUser = await prisma.user.create({
         data: { email, password, name, agreedToTerms },
       });
 
+      const token = await createSession(newUser.id);
+
+      const updatedUser = await prisma.user.update({
+        where: { id: newUser.id },
+        data: { requestToken: token },
+      });
+
       return {
         message: "User created successfully",
         success: true,
-        user: newUser as User,
+        user: updatedUser,
       };
     }),
   setRequestToken: publicProcedure

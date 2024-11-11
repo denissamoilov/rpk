@@ -1,21 +1,45 @@
-import * as jose from "jose";
+import "server-only";
+
+import { SignJWT, jwtVerify } from "jose";
+import { cookies } from "next/headers";
 
 interface Payload {
   [key: string]: string | number;
 }
 
 // TODO: fix this
-const SECRET_KEY = process.env.JWT_SECRET ?? "kAwQMYyOFTQTQW0bjAv1UoKxGUzDcID6";
+const secretKey = process.env.JWT_SECRET ?? "kAwQMYyOFTQTQW0bjAv1UoKxGUzDcID6";
 
-export async function generateToken(
+const encodedSecret = new TextEncoder().encode(secretKey);
+
+export async function encryptToken(
   payload: Payload,
   expiresIn: string = "1h"
 ): Promise<string> {
-  const token = new jose.SignJWT(payload)
+  const token = new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setExpirationTime(expiresIn);
 
-  const encodedSecret = new TextEncoder().encode(SECRET_KEY);
-
   return await token.sign(encodedSecret);
+}
+
+export async function decryptToken(token: string) {
+  try {
+    const { payload } = await jwtVerify(token, encodedSecret);
+    return payload;
+  } catch (error) {
+    console.error("Error decrypting token", error);
+  }
+}
+
+export async function createSession(uid: string) {
+  const token = await encryptToken({ userId: uid }, "30d");
+
+  cookies().set("session", token, {
+    httpOnly: true,
+    secure: true,
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+  });
+
+  return token;
 }

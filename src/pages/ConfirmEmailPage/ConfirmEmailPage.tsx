@@ -1,32 +1,64 @@
 "use client";
 
-import { trpc } from "@/app/_trpc/client";
+import React, { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Button } from "@/shared/ui/Button/Button";
+import Link from "next/link";
+import { useUserStore } from "@/entities/user/model/store";
+import { trpc } from "@/app/_trpc/client";
+import { sendEmail } from "@/shared/utils/emails";
 
 export default function ConfirmEmailPage() {
-  const t = useTranslations("Auth.ConfirmEmailPage");
-  const searchParams = useSearchParams();
+  const t = useTranslations("Auth.CompletePage");
+  const [isLoading, setIsLoading] = useState(false);
+  const [shouldFetchToken, setShouldFetchToken] = useState(false);
 
-  const uid = searchParams?.get("uid");
-  const token = searchParams?.get("token");
+  // const {
+  //   data: requestToken,
+  //   isLoading: isRequestTokenLoading,
+  //   error,
+  // } = trpc.auth.getRequestToken.useQuery(
+  //   { id: user!.id },
+  //   {
+  //     enabled: shouldFetchToken,
+  //     onSuccess: (data) => {
+  //       sendEmail({
+  //         token: data,
+  //       }).then(() => {
+  //         setIsLoading(false);
+  //         setShouldFetchToken(false);
+  //       });
+  //     },
+  //     onError: (err) => {
+  //       console.error("Error fetching request token:", err);
+  //       setIsLoading(false);
+  //       setShouldFetchToken(false);
+  //     },
+  //   }
+  // );
 
-  const { mutateAsync: confirmEmail, isLoading: isConfirmEmailLoading } =
-    trpc.auth.confirmEmail.useMutation();
-
-  useEffect(() => {
-    if (uid && token) {
-      confirmEmail({ id: uid, token });
-    }
-  }, [uid, token, confirmEmail]);
+  // const handleResendEmail = useCallback(() => {
+  //   if (!user) return;
+  //   setIsLoading(true);
+  //   setShouldFetchToken(true);
+  // }, [user]);
 
   return (
     <div className="flex flex-col gap-4 w-full items-center">
       <div className="flex flex-col gap-4 items-center">
-        <h1 className="text-heading-1">{t("congratulations")}</h1>
-        <p className="text-md">{t("emailConfirmed")}</p>
+        <h1 className="text-heading-1">{t("emailSent")}</h1>
+        <p className="text-md mb-8">{t("checkInbox")}</p>
       </div>
+      <Button
+        variant="primary"
+        size="lg"
+        isLoading={isLoading}
+        // disabled={!user}
+        // onClick={handleResendEmail}
+      >
+        {t("resendEmail")}
+      </Button>
+      <Link href="/">{t("goToHome")}</Link>
     </div>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/shared/ui/Button/Button";
@@ -14,15 +13,14 @@ import { useSignupSchema } from "../../model/schemas";
 import { SignupFormData } from "../../model/schemas";
 import { trpc } from "@/app/_trpc/client";
 import { useUserStore } from "@/entities/user/model/store";
-import { generateToken } from "@/server/jwt";
 import { sendEmail } from "@/shared/utils/emails";
+import { useRouter } from "next/navigation";
 
 export const SignupForm = () => {
   const t = useTranslations();
   const signupSchema = useSignupSchema();
-  const setUser = useUserStore((state) => state.setUser);
-
   const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -34,27 +32,18 @@ export const SignupForm = () => {
   });
 
   const { mutateAsync: signUp, isLoading: isSignUpLoading } =
-    trpc.auth.register.useMutation();
-  const { mutateAsync: setRequestToken, isLoading: isSetRequestTokenLoading } =
-    trpc.auth.setRequestToken.useMutation();
+    trpc.auth.signup.useMutation();
 
   const onSubmit = async (data: SignupFormData) => {
     try {
       const result = await signUp(data);
-      if (result.success) {
-        setUser(result.user);
 
-        await generateToken({ id: result.user.id }, "24h").then((token) => {
-          setRequestToken({ id: result.user.id, token }).then(() => {
-            sendEmail({
-              token,
-              uid: result.user.id,
-              email: result.user.email,
-            }).then(() => {
-              router.push("/complete");
-            });
-          });
+      if (result.success) {
+        await sendEmail({
+          token: result.user.requestToken,
         });
+
+        router.push("/confirm-email");
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -64,7 +53,6 @@ export const SignupForm = () => {
             message: t("Errors.emailAlreadyExists"),
           });
         } else {
-          console.log("error  ::", error);
           setError("root", {
             type: "manual",
             message: t("Errors.somethingWentWrong"),

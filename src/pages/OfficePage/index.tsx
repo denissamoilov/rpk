@@ -2,7 +2,6 @@
 
 import { useUserStore } from "@/entities/user/model/store";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 export function OfficePage() {
   const t = useTranslations("Index");
   const user = useUserStore((state) => state.user);
