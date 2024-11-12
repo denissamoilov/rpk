@@ -17,8 +17,6 @@ export const authRouter = router({
       throw new Error("Invalid email or password");
     }
 
-    console.log("user", user);
-
     return { message: "Login successful", success: true, user };
   }),
   signup: publicProcedure

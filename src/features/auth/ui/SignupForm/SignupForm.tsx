@@ -20,7 +20,7 @@ export const SignupForm = () => {
   const t = useTranslations();
   const signupSchema = useSignupSchema();
   const router = useRouter();
-
+  const setUser = useUserStore((state) => state.setUser);
   const {
     register,
     handleSubmit,
@@ -41,7 +41,11 @@ export const SignupForm = () => {
       if (result.success) {
         await sendEmail({
           token: result.user.requestToken,
+          uid: result.user.id,
+          email: result.user.email,
         });
+
+        setUser({ ...result.user });
 
         router.push("/confirm-email");
       }

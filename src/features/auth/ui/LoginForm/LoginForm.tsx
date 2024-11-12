@@ -13,7 +13,6 @@ import { useTranslations } from "next-intl";
 import { Checkbox } from "@/shared/ui/Checkbox/Checkbox";
 import { Separator } from "@/shared/ui/Separator/Separator";
 import { GoogleIcon } from "@/shared/icons/GoogleIcon";
-import { useLogin } from "../../api/login";
 import { trpc } from "@/app/_trpc/client";
 import { useUserStore } from "@/entities/user/model/store";
 import { useRouter } from "next/navigation";
@@ -40,7 +39,10 @@ export const LoginForm = () => {
       const result = await login(data);
       if (result.success) {
         setUser({ ...result.user });
-        router.push("/in/");
+
+        !result.user?.emailVerified
+          ? router.push("/confirm-email")
+          : router.push("/in/");
       }
     } catch (error) {
       console.error("Login failed:", error);
