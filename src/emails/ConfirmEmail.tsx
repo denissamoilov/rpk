@@ -4,17 +4,17 @@ import { emailButtonStyle } from "./styles/styles";
 
 export default function ConfirmEmail({
   token,
-  uid,
   host,
+  locale,
 }: {
-  token: string;
-  uid: string;
+  token: string | null;
   host: string | null;
+  locale: string | null;
 }) {
   return (
     <Html>
       <Button
-        href={`https://${host}/confirm-email?token=${token}&uid=${uid}`}
+        href={`https://${host}/${locale ?? "en"}/complete?token=${token}`}
         style={emailButtonStyle}
       >
         Confirm email

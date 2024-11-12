@@ -24,30 +24,6 @@ export default function ConfirmEmailPage() {
 
   // If we came from SignupForm, then we have a user in the store
 
-  // const {
-  //   data: requestToken,
-  //   isLoading: isRequestTokenLoading,
-  //   error,
-  // } = trpc.auth.getRequestToken.useQuery(
-  //   { id: user!.id },
-  //   {
-  //     enabled: shouldFetchToken,
-  //     onSuccess: (data) => {
-  //       sendEmail({
-  //         token: data,
-  //       }).then(() => {
-  //         setIsLoading(false);
-  //         setShouldFetchToken(false);
-  //       });
-  //     },
-  //     onError: (err) => {
-  //       console.error("Error fetching request token:", err);
-  //       setIsLoading(false);
-  //       setShouldFetchToken(false);
-  //     },
-  //   }
-  // );
-
   const handleResendEmail = useCallback(async () => {
     if (!token) return;
 

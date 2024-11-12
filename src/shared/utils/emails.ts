@@ -5,7 +5,7 @@ export const sendEmail = async ({
   uid,
   email,
 }: {
-  token: string;
+  token: string | null;
   uid: string;
   email: string;
 }) => {

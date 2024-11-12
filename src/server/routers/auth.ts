@@ -2,7 +2,7 @@ import { loginSchema, signUpSchema } from "@/features/auth/model/schemas";
 import { router, publicProcedure } from "../trpc";
 import { prisma } from "@/shared/lib/prisma";
 import { z } from "zod";
-import { createSession } from "@/server/jwt";
+import { createSession, decryptToken } from "@/server/jwt";
 
 export const authRouter = router({
   login: publicProcedure.input(loginSchema).mutation(async ({ input, ctx }) => {
@@ -84,11 +84,16 @@ export const authRouter = router({
       return user?.requestToken;
     }),
   confirmEmail: publicProcedure
-    .input(z.object({ id: z.string(), token: z.string() }))
+    .input(z.object({ token: z.string() }))
     .mutation(async ({ input }) => {
-      const { id, token } = input;
+      const { token } = input;
 
-      const user = await prisma.user.findUnique({ where: { id } });
+      const payload = await decryptToken(token);
+
+      const user = await prisma.user.findUnique({
+        where: { id: payload?.userId },
+      });
+
       if (!user) {
         throw new Error("User not found");
       }
@@ -97,9 +102,10 @@ export const authRouter = router({
         throw new Error("Invalid token");
       }
 
+      // Update user emailVerified and remove requestToken
       await prisma.user.update({
-        where: { id },
-        data: { emailVerified: new Date() },
+        where: { id: payload?.userId },
+        data: { emailVerified: new Date(), requestToken: null },
       });
     }),
 });

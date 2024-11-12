@@ -9,17 +9,16 @@ export default function CompletePage() {
   const t = useTranslations("Auth.ConfirmEmailPage");
   const searchParams = useSearchParams();
 
-  const uid = searchParams?.get("uid");
   const token = searchParams?.get("token");
 
   const { mutateAsync: confirmEmail, isLoading: isConfirmEmailLoading } =
     trpc.auth.confirmEmail.useMutation();
 
   useEffect(() => {
-    if (uid && token) {
-      confirmEmail({ id: uid, token });
+    if (token) {
+      confirmEmail({ token });
     }
-  }, [uid, token, confirmEmail]);
+  }, [token, confirmEmail]);
 
   return (
     <div className="flex flex-col gap-4 w-full items-center">
