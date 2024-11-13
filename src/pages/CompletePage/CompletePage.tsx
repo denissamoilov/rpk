@@ -2,6 +2,7 @@
 
 import { trpc } from "@/app/_trpc/client";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -25,6 +26,7 @@ export default function CompletePage() {
       <div className="flex flex-col gap-4 items-center">
         <h1 className="text-heading-1">{t("congratulations")}</h1>
         <p className="text-md">{t("emailConfirmed")}</p>
+        <Link href="/login">{t("login")}</Link>
       </div>
     </div>
   );

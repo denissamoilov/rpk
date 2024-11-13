@@ -1,4 +1,4 @@
-import { OfficePage } from "@/pages/OfficePage";
+import { DashboardPage } from "@/pages/DashboardPage";
 import { setRequestLocale } from "next-intl/server";
 
 export default function Page({
@@ -8,5 +8,5 @@ export default function Page({
 }) {
   setRequestLocale(locale);
 
-  return <OfficePage />;
+  return <DashboardPage />;
 }

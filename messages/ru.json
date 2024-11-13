@@ -72,7 +72,8 @@
     },
     "ConfirmEmailPage": {
       "congratulations": "Поздравляем",
-      "emailConfirmed": "Ваш email подтвержден"
+      "emailConfirmed": "Ваш email подтвержден",
+      "login": "Войти"
     }
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/shared/ui/Button/Button";
 import { Input } from "@/shared/ui/Input/Input";
@@ -26,12 +26,12 @@ export const LoginForm = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
 
-  //   const { mutateAsync: login, isLoading } = useLogin();
   const { mutateAsync: login, isLoading } = trpc.auth.login.useMutation();
 
   const onSubmit = async (data: LoginFormData) => {
@@ -69,7 +69,18 @@ export const LoginForm = () => {
           size="lg"
         />
         <div className="flex justify-between items-center">
-          <Checkbox id="rememberMe" label={t("Auth.LoginForm.rememberMe")} />
+          <Controller
+            control={control}
+            name={`rememberMe`}
+            render={({ field: { onChange, value } }) => (
+              <Checkbox
+                onCheckedChange={onChange}
+                checked={value === true}
+                id="rememberMe"
+                label={t("Auth.LoginForm.rememberMe")}
+              />
+            )}
+          />
           <Link href="/forgot-password" className="text-md">
             {t("Auth.LoginForm.forgotPassword")}
           </Link>

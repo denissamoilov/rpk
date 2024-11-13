@@ -2,13 +2,13 @@ import { loginSchema, signUpSchema } from "@/features/auth/model/schemas";
 import { router, publicProcedure } from "../trpc";
 import { prisma } from "@/shared/lib/prisma";
 import { z } from "zod";
-import { createSession, decryptToken } from "@/server/jwt";
+import { createSession, decryptToken, setSession } from "@/server/jwt";
 
 export const authRouter = router({
-  login: publicProcedure.input(loginSchema).mutation(async ({ input, ctx }) => {
-    const { email, password } = input;
+  login: publicProcedure.input(loginSchema).mutation(async ({ input }) => {
+    const { email, password, rememberMe } = input;
 
-    console.log("ctx", ctx);
+    console.log("rememberMe", rememberMe);
 
     const user = await prisma.user.findUnique({
       where: { email },
@@ -16,6 +16,11 @@ export const authRouter = router({
     if (!user || user.password !== password) {
       throw new Error("Invalid email or password");
     }
+
+    // if (rememberMe) {
+    //   const token = await createSession(user.id);
+    //   setSession(token);
+    // }
 
     return { message: "Login successful", success: true, user };
   }),

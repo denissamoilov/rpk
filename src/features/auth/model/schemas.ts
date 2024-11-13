@@ -8,6 +8,7 @@ export const loginSchema = z.object({
   password: z.string().min(MIN_PASSWORD_LENGTH, {
     message: "Password must be at least 8 characters long",
   }),
+  rememberMe: z.boolean().optional(),
 });
 
 export const useLoginSchema = () => {
@@ -18,6 +19,7 @@ export const useLoginSchema = () => {
       //   message: t("Errors.passwordTooShort"),
       message: "Password must be at least 8 characters long",
     }),
+    rememberMe: z.boolean().optional(),
   });
 };
 

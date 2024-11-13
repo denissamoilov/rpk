@@ -73,7 +73,8 @@
     },
     "ConfirmEmailPage": {
       "congratulations": "Congratulations",
-      "emailConfirmed": "Your email has been confirmed"
+      "emailConfirmed": "Your email has been confirmed",
+      "login": "Login"
     }
   }
 }
