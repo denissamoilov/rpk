@@ -1,17 +1,13 @@
 "use client";
 
-import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/shared/ui/Button/Button";
-import { Input } from "@/shared/ui/Input/Input";
+import { Button, Input, Checkbox, Separator, Link } from "@/shared/ui";
 import {
   useLoginSchema,
   type LoginFormData,
 } from "@/features/auth/model/schemas";
 import { useTranslations } from "next-intl";
-import { Checkbox } from "@/shared/ui/Checkbox/Checkbox";
-import { Separator } from "@/shared/ui/Separator/Separator";
 import { GoogleIcon } from "@/shared/icons/GoogleIcon";
 import { trpc } from "@/app/_trpc/client";
 import { useUserStore } from "@/entities/user/model/store";
@@ -40,9 +36,11 @@ export const LoginForm = () => {
       if (result.success) {
         setUser({ ...result.user });
 
-        !result.user?.emailVerified
-          ? router.push("/confirm-email")
-          : router.push("/in/");
+        if (!result.user?.emailVerified) {
+          router.push("/confirm-email");
+        } else {
+          router.push("/in/");
+        }
       }
     } catch (error) {
       console.error("Login failed:", error);

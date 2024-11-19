@@ -15,7 +15,7 @@ const buttonVariants = cva(
         secondary: "bg-secondary-500 text-white hover:bg-secondary-600",
         accent: "bg-accent-500 text-white hover:bg-accent-600",
         outline:
-          "border border-input bg-background hover:bg-gray-50 hover:text-gray-900",
+          "border border-gray-100 bg-background hover:bg-gray-50 hover:text-gray-900",
         ghost: "hover:bg-gray-100 hover:text-gray-900",
         gray: "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200",
       },
@@ -62,7 +62,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(
           buttonVariants({ variant, size, className }),
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2",
+          "focus-outline",
           "dark:focus-visible:border-gray-700 dark:focus-visible:ring-gray-700"
         )}
         ref={ref}

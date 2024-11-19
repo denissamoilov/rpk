@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Label } from "../Label/Label";
-import { CircleAlert, Icon } from "lucide-react";
+import { CircleAlert } from "lucide-react";
 
 const inputVariants = cva(
   "w-full border transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
@@ -36,10 +36,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             className={cn(
               inputVariants({ size }),
-              "bg-white border-input text-gray-900 ring-offset-background",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2",
-              "dark:bg-gray-950 dark:border-gray-800 dark:text-gray-100",
-              "dark:focus-visible:border-gray-700 dark:focus-visible:ring-gray-700",
+              "focus-outline",
+              "bg-transparent border-gray-100 text-gray-900",
+              // "dark:bg-gray-950 dark:border-gray-800 dark:text-gray-100",
+              // "dark:focus-visible:border-gray-700 dark:focus-visible:ring-primary-50",
               error && "!border-error-500 !focus-visible:ring-error-500",
               className
             )}

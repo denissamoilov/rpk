@@ -20,7 +20,7 @@ const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
         className={cn(
           "font-medium",
           labelVariants[size],
-          error ? "text-red-500" : "text-gray-700 dark:text-gray-100",
+          error ? "text-red-500" : "text-gray-900 dark:text-gray-100",
           className
         )}
         {...props}

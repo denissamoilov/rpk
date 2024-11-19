@@ -8,7 +8,7 @@ interface Payload {
 }
 
 const sessionCookieName = "session";
-const requestTokenCookieName = "requestToken";
+// const requestTokenCookieName = "requestToken";
 const sessionCookieExpiration = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
 
 // TODO: fix this

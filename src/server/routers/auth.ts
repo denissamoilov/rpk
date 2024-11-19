@@ -13,56 +13,55 @@ export const authRouter = router({
     const user = await prisma.user.findUnique({
       where: { email },
     });
+    console.log("user ::", user);
     if (!user || user.password !== password) {
       throw new Error("Invalid email or password");
     }
 
-    // if (rememberMe) {
-    //   const token = await createSession(user.id);
-    //   setSession(token);
-    // }
+    if (rememberMe) {
+      const token = await createSession(user.id);
+      setSession(token);
+    }
 
     return { message: "Login successful", success: true, user };
   }),
-  signup: publicProcedure
-    .input(signUpSchema)
-    .mutation(async ({ input, ctx }) => {
-      const { name, email, password, agreedToTerms } = input;
+  signup: publicProcedure.input(signUpSchema).mutation(async ({ input }) => {
+    const { name, email, password, agreedToTerms } = input;
 
-      const existingUser = await prisma.user.findUnique({
-        where: { email },
-      });
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
 
-      if (existingUser) {
-        throw new Error("User already exists");
-      }
+    if (existingUser) {
+      throw new Error("User already exists");
+    }
 
-      if (!agreedToTerms) {
-        throw new Error("You must agree to the terms and conditions");
-      }
+    if (!agreedToTerms) {
+      throw new Error("You must agree to the terms and conditions");
+    }
 
-      if (password.length < 8) {
-        throw new Error("Password must be at least 8 characters long");
-      }
+    if (password.length < 8) {
+      throw new Error("Password must be at least 8 characters long");
+    }
 
-      // Create new user
-      const newUser = await prisma.user.create({
-        data: { email, password, name, agreedToTerms },
-      });
+    // Create new user
+    const newUser = await prisma.user.create({
+      data: { email, password, name, agreedToTerms },
+    });
 
-      const token = await createSession(newUser.id);
+    const token = await createSession(newUser.id);
 
-      const updatedUser = await prisma.user.update({
-        where: { id: newUser.id },
-        data: { requestToken: token },
-      });
+    const updatedUser = await prisma.user.update({
+      where: { id: newUser.id },
+      data: { requestToken: token },
+    });
 
-      return {
-        message: "User created successfully",
-        success: true,
-        user: updatedUser,
-      };
-    }),
+    return {
+      message: "User created successfully",
+      success: true,
+      user: updatedUser,
+    };
+  }),
   setRequestToken: publicProcedure
     .input(z.object({ id: z.string(), token: z.string() }))
     .mutation(async ({ input }) => {
@@ -94,6 +93,8 @@ export const authRouter = router({
       const { token } = input;
 
       const payload = await decryptToken(token);
+
+      console.log("payload ::", payload);
 
       const user = await prisma.user.findUnique({
         where: { id: payload?.userId },

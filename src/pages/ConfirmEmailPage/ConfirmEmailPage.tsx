@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button } from "@/shared/ui/Button/Button";
-import Link from "next/link";
+import { Button, Link } from "@/shared/ui";
 import { sendEmail } from "@/shared/utils/emails";
 import { useRouter } from "next/dist/client/components/navigation";
 import { useUserStore } from "@/entities/user/model/store";

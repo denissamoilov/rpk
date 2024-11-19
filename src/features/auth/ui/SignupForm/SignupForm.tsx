@@ -1,14 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/shared/ui/Button/Button";
-import { Input } from "@/shared/ui/Input/Input";
+import { Button, Input, Checkbox, Separator, Link } from "@/shared/ui";
 import { useTranslations } from "next-intl";
-import { Checkbox } from "@/shared/ui/Checkbox/Checkbox";
 import { GoogleIcon } from "@/shared/icons/GoogleIcon";
-import { Separator } from "@/shared/ui/Separator/Separator";
 import { useSignupSchema } from "../../model/schemas";
 import { SignupFormData } from "../../model/schemas";
 import { trpc } from "@/app/_trpc/client";

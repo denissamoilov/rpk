@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { useAppStore } from "@/entities/app/model/store";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Select, SelectProps } from "@/shared/ui/Select/Select";
+import { Select } from "@/shared/ui";
 export const LanguageSelector = () => {
   const t = useTranslations("LanguageSelector");
   const locale = useLocale();

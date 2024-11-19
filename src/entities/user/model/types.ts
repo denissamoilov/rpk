@@ -1,11 +1,13 @@
+import { Role } from "@prisma/client";
+
 export interface User {
   id: string;
   email: string;
-  name: string;
+  name: string | null;
   avatar?: string;
-  role: "user" | "admin";
+  role: Role; //"user" | "admin";
   createdAt: string;
-  requestToken?: string;
+  requestToken: string | null;
 }
 
 export type Status = "active" | "inactive" | "pending";

@@ -1,8 +1,8 @@
 "use client";
 
 import { trpc } from "@/app/_trpc/client";
+import { Link } from "@/shared/ui";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -12,8 +12,7 @@ export default function CompletePage() {
 
   const token = searchParams?.get("token");
 
-  const { mutateAsync: confirmEmail, isLoading: isConfirmEmailLoading } =
-    trpc.auth.confirmEmail.useMutation();
+  const { mutateAsync: confirmEmail } = trpc.auth.confirmEmail.useMutation();
 
   useEffect(() => {
     if (token) {

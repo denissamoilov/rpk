@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     fontSize: {
@@ -78,17 +79,17 @@ const config: Config = {
           950: "#0d2924",
         },
         gray: {
-          50: "#f6f5f4",
-          100: "#e9e8e6",
-          200: "#d4d2ce",
-          300: "#b3b0aa",
-          400: "#8c8883",
-          500: "#6f6b65",
-          600: "#565350",
-          700: "#454341",
-          800: "#373533",
-          900: "#2d2c2a",
-          950: "#1a1918",
+          50: "var(--gray-50)",
+          100: "var(--gray-100)",
+          200: "var(--gray-200)",
+          300: "var(--gray-300)",
+          400: "var(--gray-400)",
+          500: "var(--gray-500)",
+          600: "var(--gray-600)",
+          700: "var(--gray-700)",
+          800: "var(--gray-800)",
+          900: "var(--gray-900)",
+          950: "var(--gray-950)",
         },
         accent: {
           50: "#f4f7f4",
