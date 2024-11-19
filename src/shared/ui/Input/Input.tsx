@@ -37,7 +37,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className={cn(
               inputVariants({ size }),
               "focus-outline",
-              "bg-transparent border-gray-100 text-gray-900",
+              "bg-background border-gray-100 text-gray-900",
               // "dark:bg-gray-950 dark:border-gray-800 dark:text-gray-100",
               // "dark:focus-visible:border-gray-700 dark:focus-visible:ring-primary-50",
               error && "!border-error-500 !focus-visible:ring-error-500",

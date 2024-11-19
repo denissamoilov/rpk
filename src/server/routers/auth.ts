@@ -2,7 +2,13 @@ import { loginSchema, signUpSchema } from "@/features/auth/model/schemas";
 import { router, publicProcedure } from "../trpc";
 import { prisma } from "@/shared/lib/prisma";
 import { z } from "zod";
-import { createSession, decryptToken, setSession } from "@/server/jwt";
+import {
+  createSession,
+  decryptToken,
+  deleteSession,
+  getSession,
+  setSession,
+} from "@/server/jwt";
 
 export const authRouter = router({
   login: publicProcedure.input(loginSchema).mutation(async ({ input }) => {
@@ -24,6 +30,17 @@ export const authRouter = router({
     }
 
     return { message: "Login successful", success: true, user };
+  }),
+  logout: publicProcedure.mutation(async () => {
+    const token = await getSession();
+
+    if (token !== "") {
+      console.log("logout!", token);
+
+      await deleteSession("session");
+    }
+
+    return { success: true };
   }),
   signup: publicProcedure.input(signUpSchema).mutation(async ({ input }) => {
     const { name, email, password, agreedToTerms } = input;

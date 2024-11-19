@@ -42,10 +42,7 @@ export const Select: React.FC<SelectProps> = ({
         className={cn(
           selectVariants({ size }),
           "focus-outline",
-          "bg-transparent border-gray-100 text-gray-900",
-          // "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2",
-          // "dark:bg-gray-950 dark:border-gray-800 dark:text-gray-100",
-          // "dark:focus-visible:border-gray-700 dark:focus-visible:ring-gray-700",
+          "bg-background border-gray-100 text-gray-900",
           error && "!border-error-500 !focus-visible:ring-error-500",
           className
         )}

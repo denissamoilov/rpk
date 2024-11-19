@@ -46,8 +46,12 @@ export async function updateSession(uid: string) {
   setSession(token);
 }
 
-export async function deleteSession() {
-  cookies().delete(sessionCookieName);
+export async function deleteSession(session: string) {
+  try {
+    cookies().delete(session);
+  } catch (error) {
+    console.log("Error deleting session: ", error);
+  }
 }
 
 export async function setSession(token: string) {

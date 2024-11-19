@@ -19,7 +19,7 @@ const Checkbox = React.forwardRef<
       ref={ref}
       className={cn(
         "focus-outline",
-        "peer h-6 w-6 shrink-0 rounded-sm border border-gray-100 ring-offset-background",
+        "bg-background peer h-6 w-6 shrink-0 rounded-sm border border-gray-100 ring-offset-background",
         // "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2",
         "disabled:cursor-not-allowed disabled:opacity-50",
         "data-[state=checked]:bg-gray-50 data-[state=checked]:text-gray-950",
