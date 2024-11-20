@@ -73,7 +73,8 @@
     },
     "ConfirmEmailPage": {
       "congratulations": "Täname",
-      "emailConfirmed": "Teie email on kinnitatud"
+      "emailConfirmed": "Teie email on kinnitatud",
+      "login": "Logi sisse"
     }
   }
 }

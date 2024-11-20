@@ -20,13 +20,13 @@ const selectVariants = cva(
   }
 );
 
-export interface SelectProps extends VariantProps<typeof selectVariants> {
+export type SelectProps = VariantProps<typeof selectVariants> & {
   options: { value: string; label: string }[];
   value: string;
   onChange: (value: string) => void;
   error?: string;
   className?: string;
-}
+};
 
 export const Select: React.FC<SelectProps> = ({
   options,
@@ -41,10 +41,8 @@ export const Select: React.FC<SelectProps> = ({
       <SelectPrimitive.Trigger
         className={cn(
           selectVariants({ size }),
-          "bg-white border-input text-gray-900 ring-offset-background",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2",
-          "dark:bg-gray-950 dark:border-gray-800 dark:text-gray-100",
-          "dark:focus-visible:border-gray-700 dark:focus-visible:ring-gray-700",
+          "focus-outline",
+          "bg-background border-gray-100 text-gray-900",
           error && "!border-error-500 !focus-visible:ring-error-500",
           className
         )}
@@ -57,7 +55,8 @@ export const Select: React.FC<SelectProps> = ({
       <SelectPrimitive.Content>
         <SelectPrimitive.Viewport
           className={cn(
-            "bg-white border border-gray-300 rounded-sm shadow-lg p-1",
+            "flex flex-col focus-outline gap-1",
+            "bg-background border border-gray-300 rounded-sm shadow-lg p-1",
             "dark:bg-gray-950 dark:border-gray-800 dark:text-gray-100"
           )}
         >
@@ -66,17 +65,19 @@ export const Select: React.FC<SelectProps> = ({
               key={option.value}
               value={option.value}
               className={cn(
-                "flex items-center justify-between px-4 py-2 text-sm text-gray-700 cursor-pointer outline-none rounded",
-                "hover:bg-gray-100 focus:bg-gray-100",
+                "flex gap-1 items-center justify-start px-2 py-1 text-sm text-gray-700 cursor-pointer outline-none rounded",
+                "hover:bg-gray-50 focus:bg-gray-100",
                 "dark:hover:bg-gray-900 dark:focus:bg-gray-800 dark:text-gray-100"
               )}
             >
+              <span className="size-4 shrink-0">
+                <SelectPrimitive.ItemIndicator>
+                  <Check className="size-4" />
+                </SelectPrimitive.ItemIndicator>
+              </span>
               <SelectPrimitive.ItemText>
                 {option.label}
               </SelectPrimitive.ItemText>
-              <SelectPrimitive.ItemIndicator>
-                <Check className="w-4 h-4" />
-              </SelectPrimitive.ItemIndicator>
             </SelectPrimitive.Item>
           ))}
         </SelectPrimitive.Viewport>

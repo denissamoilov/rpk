@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
-import { Button } from "@/shared/ui/Button/Button";
+import { Button } from "@/shared/ui";
 import { createCompany } from "../../actions";
 
 export function CompanyForm() {

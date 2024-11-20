@@ -1,7 +1,7 @@
 "use client";
 
+import { Link } from "@/shared/ui";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 export function HomePage() {
   const t = useTranslations("Index");
 

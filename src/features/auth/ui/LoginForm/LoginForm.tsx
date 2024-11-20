@@ -1,19 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/shared/ui/Button/Button";
-import { Input } from "@/shared/ui/Input/Input";
+import { Button, Input, Checkbox, Separator, Link } from "@/shared/ui";
 import {
   useLoginSchema,
   type LoginFormData,
 } from "@/features/auth/model/schemas";
 import { useTranslations } from "next-intl";
-import { Checkbox } from "@/shared/ui/Checkbox/Checkbox";
-import { Separator } from "@/shared/ui/Separator/Separator";
 import { GoogleIcon } from "@/shared/icons/GoogleIcon";
-import { useLogin } from "../../api/login";
 import { trpc } from "@/app/_trpc/client";
 import { useUserStore } from "@/entities/user/model/store";
 import { useRouter } from "next/navigation";
@@ -27,20 +22,25 @@ export const LoginForm = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
 
-  //   const { mutateAsync: login, isLoading } = useLogin();
   const { mutateAsync: login, isLoading } = trpc.auth.login.useMutation();
 
   const onSubmit = async (data: LoginFormData) => {
     try {
       const result = await login(data);
       if (result.success) {
-        setUser({ ...result.user });
-        router.push("/in/");
+        // setUser(result.user);
+
+        if (!result.user?.emailVerified) {
+          router.push("/confirm-email");
+        } else {
+          router.push("/in/");
+        }
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -67,7 +67,18 @@ export const LoginForm = () => {
           size="lg"
         />
         <div className="flex justify-between items-center">
-          <Checkbox id="rememberMe" label={t("Auth.LoginForm.rememberMe")} />
+          <Controller
+            control={control}
+            name={`rememberMe`}
+            render={({ field: { onChange, value } }) => (
+              <Checkbox
+                onCheckedChange={onChange}
+                checked={value === true}
+                id="rememberMe"
+                label={t("Auth.LoginForm.rememberMe")}
+              />
+            )}
+          />
           <Link href="/forgot-password" className="text-md">
             {t("Auth.LoginForm.forgotPassword")}
           </Link>
