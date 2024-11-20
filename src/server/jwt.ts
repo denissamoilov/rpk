@@ -10,6 +10,7 @@ interface Payload {
 const sessionCookieName = "session";
 // const requestTokenCookieName = "requestToken";
 const sessionCookieExpiration = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
+const sessionCookieExpirationHour = new Date(Date.now() + 1000 * 60 * 60);
 
 // TODO: fix this
 const secretKey = process.env.JWT_SECRET ?? "kAwQMYyOFTQTQW0bjAv1UoKxGUzDcID6";
@@ -43,7 +44,7 @@ export async function createSession(uid: string) {
 
 export async function updateSession(uid: string) {
   const token = await encryptToken({ userId: uid }, "30d");
-  setSession(token);
+  setSession({ token, expires: 30 });
 }
 
 export async function deleteSession(session: string) {
@@ -54,12 +55,20 @@ export async function deleteSession(session: string) {
   }
 }
 
-export async function setSession(token: string) {
-  cookies().set(sessionCookieName, token, {
+export async function setSession({
+  token,
+  expires,
+}: {
+  token: string;
+  expires: number;
+}) {
+  const cookieOptions = {
     httpOnly: true,
-    secure: true,
-    expires: sessionCookieExpiration,
-  });
+    secure: process.env.NODE_ENV === "production",
+    expires: new Date(Date.now() + expires),
+  };
+
+  cookies().set(sessionCookieName, token, cookieOptions);
 }
 
 export async function getSession() {

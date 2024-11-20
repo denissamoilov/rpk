@@ -34,7 +34,7 @@ export const LoginForm = () => {
     try {
       const result = await login(data);
       if (result.success) {
-        setUser({ ...result.user });
+        // setUser(result.user);
 
         if (!result.user?.emailVerified) {
           router.push("/confirm-email");

@@ -1,5 +1,5 @@
 import { loginSchema, signUpSchema } from "@/features/auth/model/schemas";
-import { router, publicProcedure } from "../trpc";
+import { router, publicProcedure, privateProcedure } from "../trpc";
 import { prisma } from "@/shared/lib/prisma";
 import { z } from "zod";
 import {
@@ -24,12 +24,16 @@ export const authRouter = router({
       throw new Error("Invalid email or password");
     }
 
-    if (rememberMe) {
-      const token = await createSession(user.id);
-      setSession(token);
-    }
+    const expires = rememberMe ? 1000 * 60 * 60 * 24 * 30 : 1000 * 60;
 
-    return { message: "Login successful", success: true, user };
+    const token = await createSession(user.id);
+
+    setSession({
+      token,
+      expires,
+    });
+
+    return { message: "Login successful", success: true, user: user };
   }),
   logout: publicProcedure.mutation(async () => {
     const token = await getSession();
@@ -114,7 +118,7 @@ export const authRouter = router({
       console.log("payload ::", payload);
 
       const user = await prisma.user.findUnique({
-        where: { id: payload?.userId },
+        where: { id: payload?.userId as string },
       });
 
       if (!user) {
@@ -127,8 +131,15 @@ export const authRouter = router({
 
       // Update user emailVerified and remove requestToken
       await prisma.user.update({
-        where: { id: payload?.userId },
+        where: { id: payload?.userId as string },
         data: { emailVerified: new Date(), requestToken: null },
       });
     }),
+  getUser: privateProcedure.query(({ ctx }) => {
+    if (!ctx.user) {
+      throw new Error("User not found");
+    }
+
+    return ctx.user;
+  }),
 });

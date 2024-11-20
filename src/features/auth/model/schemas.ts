@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+// import { useTranslations } from "next-intl";
 import { z } from "zod";
 
 const MIN_PASSWORD_LENGTH = 8;
