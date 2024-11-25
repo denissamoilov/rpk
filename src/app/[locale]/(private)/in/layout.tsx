@@ -10,7 +10,7 @@ export default function AuthLayout({
 }) {
   return (
     <TrpcProvider>
-      <div className="grid h-dvh grid-cols-[200px_minmax(900px,_1fr)] grid-rows-[auto_minmax(900px,_1fr)]">
+      <div className="grid h-dvh grid-cols-[16rem_minmax(900px,_1fr)] grid-rows-[auto_minmax(900px,_1fr)]">
         <aside className="row-span-2 p-5">
           <Sidebar />
         </aside>

@@ -2,13 +2,19 @@ import { LanguageSelector } from "@/features";
 import { Button, Link } from "@/shared/ui";
 import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export const Sidebar = () => {
   const t = useTranslations();
   return (
     <div className="flex flex-col gap-10 h-full justify-between">
+      <Image src="/images/logo.png" alt="logo" width={32} height={32} />
       <div>
-        <Button variant="outline" leftIcon={<Plus />}>
+        <Button
+          variant="outline"
+          leftIcon={<Plus />}
+          className="w-full justify-start"
+        >
           {t("Buttons.addCompany")}
         </Button>
       </div>
