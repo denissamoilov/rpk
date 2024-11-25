@@ -22,7 +22,8 @@
     "nameRequired": "Имя обязательно"
   },
   "Buttons": {
-    "submit": "Отправить"
+    "submit": "Отправить",
+    "addCompany": "Добавить фирму"
   },
   "Index": {
     "welcome": "Добро пожаловать",
@@ -74,6 +75,13 @@
       "congratulations": "Поздравляем",
       "emailConfirmed": "Ваш email подтвержден",
       "login": "Войти"
+    }
+  },
+  "Sidebar": {
+    "Menu": {
+      "buy": "Продажа",
+      "sell": "Покупка",
+      "reports": "Отчеты"
     }
   }
 }

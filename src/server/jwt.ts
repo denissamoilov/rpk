@@ -9,8 +9,8 @@ interface Payload {
 
 const sessionCookieName = "session";
 // const requestTokenCookieName = "requestToken";
-const sessionCookieExpiration = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
-const sessionCookieExpirationHour = new Date(Date.now() + 1000 * 60 * 60);
+// const sessionCookieExpiration = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
+// const sessionCookieExpirationHour = new Date(Date.now() + 1000 * 60 * 60);
 
 // TODO: fix this
 const secretKey = process.env.JWT_SECRET ?? "kAwQMYyOFTQTQW0bjAv1UoKxGUzDcID6";

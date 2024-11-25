@@ -22,7 +22,7 @@ const Checkbox = React.forwardRef<
         "bg-background peer h-6 w-6 shrink-0 rounded-sm border border-gray-100 ring-offset-background",
         // "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2",
         "disabled:cursor-not-allowed disabled:opacity-50",
-        "data-[state=checked]:bg-gray-50 data-[state=checked]:text-gray-950",
+        "data-[state=checked]:bg-gray-50 data-[state=checked]:text-gray-50",
         "dark:data-[state=checked]:bg-gray-950 dark:border-gray-800 dark:data-[state=checked]:text-gray-50",
         // "dark:focus-visible:border-gray-700 dark:focus-visible:ring-gray-700",
         error && "!border-error-500 !focus-visible:ring-error-500",

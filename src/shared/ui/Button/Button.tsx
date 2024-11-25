@@ -7,22 +7,22 @@ import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 gap-2 ring-offset-background",
+  "inline-flex items-center justify-center whitespace-nowrap font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 gap-2 ring-offset-background",
   {
     variants: {
       variant: {
-        primary: "bg-primary-500 text-white hover:bg-primary-600",
+        primary: "bg-primary-500 text-primary-foreground hover:bg-primary-600",
         secondary: "bg-secondary-500 text-white hover:bg-secondary-600",
         accent: "bg-accent-500 text-white hover:bg-accent-600",
         outline:
-          "border border-gray-100 bg-background hover:bg-gray-50 hover:text-gray-900",
+          "border border-gray-200 bg-background hover:bg-gray-100 hover:text-gray-900",
         ghost: "hover:bg-gray-100 hover:text-gray-900",
         gray: "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200",
       },
       size: {
-        sm: "h-10 text-sm px-4 rounded-sm gap-1",
-        md: "h-11 text-md px-4 rounded-md gap-2",
-        lg: "h-14 text-lg px-6 rounded-lg gap-2",
+        sm: "input-sm",
+        md: "input-md",
+        lg: "inputlg",
       },
     },
     defaultVariants: {

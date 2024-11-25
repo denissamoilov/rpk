@@ -10,13 +10,13 @@ import {
 import { useTranslations } from "next-intl";
 import { GoogleIcon } from "@/shared/icons/GoogleIcon";
 import { trpc } from "@/app/_trpc/client";
-import { useUserStore } from "@/entities/user/model/store";
+// import { useUserStore } from "@/entities/user/model/store";
 import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
   const t = useTranslations();
   const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
+  // const setUser = useUserStore((state) => state.setUser);
   const loginSchema = useLoginSchema();
 
   const {
@@ -109,7 +109,7 @@ export const LoginForm = () => {
         </Button>
       </div>
 
-      <p className="text-center text-md text-gray-600">
+      <p className="text-center text-md">
         {t("Auth.LoginForm.noAccount")}{" "}
         <Link href="/signup">{t("Auth.LoginForm.register")}</Link>
       </p>

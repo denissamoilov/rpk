@@ -5,13 +5,13 @@ import { Check, ChevronDown } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 const selectVariants = cva(
-  "inline-flex items-center justify-between w-full px-4 py-2 text-sm font-medium text-left bg-white border rounded-md shadow-sm",
+  "inline-flex items-center justify-between w-full px-4 py-2 text-sm font-medium text-left bg-background border border-gray-200 rounded-md",
   {
     variants: {
       size: {
-        sm: "h-10 text-sm py-1 px-4 rounded-sm gap-1",
-        md: "h-11 text-md py-2 px-4 rounded-md gap-2",
-        lg: "h-14 text-lg py-3 px-6 rounded-lg gap-2",
+        sm: "py-1 input-sm",
+        md: "py-2 input-md",
+        lg: "py-3 input-lg",
       },
     },
     defaultVariants: {
@@ -42,7 +42,6 @@ export const Select: React.FC<SelectProps> = ({
         className={cn(
           selectVariants({ size }),
           "focus-outline",
-          "bg-background border-gray-100 text-gray-900",
           error && "!border-error-500 !focus-visible:ring-error-500",
           className
         )}
@@ -56,8 +55,8 @@ export const Select: React.FC<SelectProps> = ({
         <SelectPrimitive.Viewport
           className={cn(
             "flex flex-col focus-outline gap-1",
-            "bg-background border border-gray-300 rounded-sm shadow-lg p-1",
-            "dark:bg-gray-950 dark:border-gray-800 dark:text-gray-100"
+            "bg-background border border-gray-200 rounded-sm shadow-lg p-1"
+            // "dark:bg-gray-950 dark:border-gray-800 dark:text-gray-100"
           )}
         >
           {options.map((option) => (
@@ -66,8 +65,8 @@ export const Select: React.FC<SelectProps> = ({
               value={option.value}
               className={cn(
                 "flex gap-1 items-center justify-start px-2 py-1 text-sm text-gray-700 cursor-pointer outline-none rounded",
-                "hover:bg-gray-50 focus:bg-gray-100",
-                "dark:hover:bg-gray-900 dark:focus:bg-gray-800 dark:text-gray-100"
+                "hover:bg-gray-200"
+                // "dark:hover:bg-gray-900 dark:focus:bg-gray-700 dark:text-gray-100"
               )}
             >
               <span className="size-4 shrink-0">

@@ -22,7 +22,8 @@
     "nameRequired": "Name is required"
   },
   "Buttons": {
-    "submit": "Submit"
+    "submit": "Submit",
+    "addCompany": "Add company"
   },
   "Index": {
     "welcome": "Welcome",
@@ -75,6 +76,13 @@
       "congratulations": "Congratulations",
       "emailConfirmed": "Your email has been confirmed",
       "login": "Login"
+    }
+  },
+  "Sidebar": {
+    "Menu": {
+      "buy": "Buy",
+      "sell": "Sell",
+      "reports": "Reports"
     }
   }
 }
