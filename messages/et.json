@@ -22,7 +22,8 @@
     "nameRequired": "Nimi on kohustuslik"
   },
   "Buttons": {
-    "submit": "Saada"
+    "submit": "Saada",
+    "addCompany": "Lisa firmat"
   },
   "Index": {
     "welcome": "Tere tulemast",
@@ -75,6 +76,13 @@
       "congratulations": "Täname",
       "emailConfirmed": "Teie email on kinnitatud",
       "login": "Logi sisse"
+    }
+  },
+  "Sidebar": {
+    "Menu": {
+      "buy": "Müük",
+      "sell": "Ost",
+      "reports": "Aruanded"
     }
   }
 }

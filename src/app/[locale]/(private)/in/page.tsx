@@ -1,4 +1,4 @@
-import { DashboardPage } from "@/pages/DashboardPage";
+import { DashboardPage } from "@/pages/DashboardPage/DashboardPage";
 import { setRequestLocale } from "next-intl/server";
 
 export default function Page({

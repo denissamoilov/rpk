@@ -158,7 +158,7 @@ export const SignupForm = () => {
           {t("Common.continueWithGoogle")}
         </Button>
       </div>
-      <p className="text-center text-md text-gray-600">
+      <p className="text-center text-md">
         {t("Auth.SignupForm.haveAccount")}{" "}
         <Link href="/">{t("Auth.LoginForm.login")}</Link>
       </p>

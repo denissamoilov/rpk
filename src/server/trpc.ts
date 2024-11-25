@@ -2,7 +2,6 @@ import { initTRPC } from "@trpc/server";
 import { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { decryptToken, getSession } from "./jwt";
 import { prisma } from "@/shared/lib/prisma";
-import { redirect } from "next/navigation";
 // import { User } from "@/entities/user/model/types";
 
 // type TRPCContext = {

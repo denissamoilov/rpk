@@ -27,7 +27,7 @@ export const LanguageSelector = () => {
         router.push(currentPathname!.replace(`/${locale}`, `/${newLocale}`));
       }
     },
-    [router, language]
+    [router, currentPathname, locale, setLanguage]
   );
 
   return (
