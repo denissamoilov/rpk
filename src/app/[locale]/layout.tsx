@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import "../globals.css";
+import { TrpcProvider } from "../_trpc/TrpcProvider";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -41,7 +42,7 @@ export default async function LocaleLayout({
     <html lang={locale} className={inter.variable}>
       <body className="font-sans antialiased bg-background text-foreground">
         <NextIntlClientProvider messages={messages}>
-          <Providers>{children}</Providers>
+          <TrpcProvider>{children}</TrpcProvider>
         </NextIntlClientProvider>
       </body>
     </html>

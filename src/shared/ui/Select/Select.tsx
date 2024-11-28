@@ -9,9 +9,9 @@ const selectVariants = cva(
   {
     variants: {
       size: {
-        sm: "py-1 input-sm",
-        md: "py-2 input-md",
-        lg: "py-3 input-lg",
+        sm: "py-1 input-sm pr-2",
+        md: "py-2 input-md pr-2",
+        lg: "py-3 input-lg pr-3",
       },
     },
     defaultVariants: {
@@ -48,7 +48,7 @@ export const Select: React.FC<SelectProps> = ({
       >
         <SelectPrimitive.Value />
         <SelectPrimitive.Icon>
-          <ChevronDown className="w-5 h-5" />
+          <ChevronDown size={16} strokeWidth={1.5} />
         </SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
       <SelectPrimitive.Content>
@@ -64,13 +64,13 @@ export const Select: React.FC<SelectProps> = ({
               key={option.value}
               value={option.value}
               className={cn(
-                "dropdown-item"
+                "dropdown-item gap-2"
                 // "dark:hover:bg-gray-900 dark:focus:bg-gray-700 dark:text-gray-100"
               )}
             >
-              <span className="size-4 shrink-0">
+              <span className="size-4 shrink-0 -mt-1">
                 <SelectPrimitive.ItemIndicator>
-                  <Check size={16} strokeWidth={1.5} />
+                  <Check size={16} strokeWidth={2} />
                 </SelectPrimitive.ItemIndicator>
               </span>
               <SelectPrimitive.ItemText className="leading-6 block">

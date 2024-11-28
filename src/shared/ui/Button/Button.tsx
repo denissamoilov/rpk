@@ -20,6 +20,10 @@ const buttonVariants = cva(
         gray: "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200",
       },
       size: {
+        "icon-xs": "input-xs px-1 min-w-8",
+        "icon-sm": "input-sm px-1 min-w-10",
+        "icon-md": "input-md px-2 min-w-11",
+        "icon-lg": "input-lg px-2 min-w-14",
         xs: "input-xs",
         sm: "input-sm",
         md: "input-md",

@@ -9,15 +9,6 @@ export const Sidebar = () => {
   return (
     <div className="flex flex-col gap-10 h-full justify-between">
       <Image src="/images/logo.png" alt="logo" width={32} height={32} />
-      <div>
-        <Button
-          variant="outline"
-          leftIcon={<Plus />}
-          className="w-full justify-start"
-        >
-          {t("Buttons.addCompany")}
-        </Button>
-      </div>
       <nav className="h-full">
         <ul className="flex flex-col gap-1">
           <li className="bg-primary-500 input-md">

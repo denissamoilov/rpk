@@ -14,7 +14,7 @@
     --secondary-foreground: 0 0% 100%;
     --accent: 120 25% 28%;
     --accent-foreground: 0 0% 100%;
-    --muted: 20 2% 99%;
+    --muted: var(--gray-200);
     --muted-foreground: 220 8.9% 46.1%;
     --radius: 0.5rem;
     /* NEUTRAL PALETTE */
@@ -109,6 +109,9 @@
     @apply flex gap-1 leading-5 items-center justify-start px-2 py-1 text-sm cursor-pointer outline-none rounded transition-colors hover:bg-gray-200 !text-foreground;
     @apply [&_a]:no-underline [&_a]:text-foreground [&_a]:flex [&_a]:items-start [&_a]:gap-1 [&_svg]:mt-0.5 [&_svg]:opacity-70
   }
+  .dialog-overlay {
+    @apply fixed inset-0 z-50 bg-neutral-900/50 backdrop-blur-sm;
+  }
 
   @media (prefers-color-scheme: dark) {
     :root {
@@ -118,7 +121,7 @@
       --primary-foreground: 0 0% 100%;
       --secondary: 166 45% 51%;
       --secondary-foreground: 0 0% 100%;
-      --muted: 215 27.9% 16.9%;
+      /* --muted: var(--neutral-700); */
       --muted-foreground: 217.9 10.6% 64.9%;
       /* GRAY PALETTE */
       --gray-50: var(--neutral-950);
