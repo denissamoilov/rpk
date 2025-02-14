@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 gap-2 ring-offset-background",
+  "inline-flex items-center justify-center whitespace-nowrap font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 ring-offset-background",
   {
     variants: {
       variant: {
@@ -16,10 +16,15 @@ const buttonVariants = cva(
         accent: "bg-accent-500 text-white hover:bg-accent-600",
         outline:
           "border border-gray-200 bg-background hover:bg-gray-100 hover:text-gray-900",
-        ghost: "hover:bg-gray-100 hover:text-gray-900",
+        ghost: "hover:bg-gray-200 hover:text-gray-900",
         gray: "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200",
       },
       size: {
+        "icon-xs": "input-xs px-1 min-w-8",
+        "icon-sm": "input-sm px-1 min-w-10",
+        "icon-md": "input-md px-2 min-w-11",
+        "icon-lg": "input-lg px-2 min-w-14",
+        xs: "input-xs",
         sm: "input-sm",
         md: "input-md",
         lg: "inputlg",
@@ -69,10 +74,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={isLoading || disabled}
         {...props}
       >
-        {isLoading && <Loader2 className="h-4 w-4 animate-spin opacity-70" />}
-        {!isLoading && leftIcon}
+        {isLoading && (
+          <Loader2 className="size-4 animate-spin opacity-70 shrink-0" />
+        )}
+        {!isLoading && leftIcon && (
+          <span className="opacity-70 shrink-0">{leftIcon}</span>
+        )}
         {children}
-        {!isLoading && rightIcon}
+        {!isLoading && rightIcon && (
+          <span className="opacity-70 shrink-0">{rightIcon}</span>
+        )}
       </Comp>
     );
   }

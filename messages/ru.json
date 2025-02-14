@@ -2,7 +2,10 @@
   "Common": {
     "or": "Или",
     "continueWithGoogle": "Продолжить с Google",
-    "loading": "Загрузка..."
+    "loading": "Загрузка...",
+    "settings": "Настройки",
+    "contracts": "Договоры",
+    "search": "Искать"
   },
   "LanguageSelector": {
     "languageSelector": "Выберите язык",
@@ -23,6 +26,7 @@
   },
   "Buttons": {
     "submit": "Отправить",
+    "logout": "Logout",
     "addCompany": "Добавить фирму"
   },
   "Index": {

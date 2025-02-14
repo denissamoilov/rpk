@@ -2,7 +2,10 @@
   "Common": {
     "or": "Või",
     "continueWithGoogle": "Jätka Google'iga",
-    "loading": "Laadimine..."
+    "loading": "Laadimine...",
+    "settings": "Settings",
+    "contracts": "Contracts",
+    "search": "Otsi"
   },
   "LanguageSelector": {
     "languageSelector": "Vali keel",
@@ -23,6 +26,7 @@
   },
   "Buttons": {
     "submit": "Saada",
+    "logout": "Logout",
     "addCompany": "Lisa firmat"
   },
   "Index": {

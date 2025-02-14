@@ -2,7 +2,10 @@
   "Common": {
     "or": "Or",
     "continueWithGoogle": "Continue with Google",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "settings": "Settings",
+    "contracts": "Contracts",
+    "search": "Search"
   },
   "LanguageSelector": {
     "languageSelector": "Select Language",
@@ -23,6 +26,7 @@
   },
   "Buttons": {
     "submit": "Submit",
+    "logout": "Logout",
     "addCompany": "Add company"
   },
   "Index": {

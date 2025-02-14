@@ -26,59 +26,6 @@ export function DashboardPage() {
       <h1 className="text-heading-1 text-center mb-6">
         {userData?.name && t("hello", { name: userData.name })}
       </h1>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
-      <p>lolsodlsaodlaos</p>
     </div>
   );
 }

@@ -9,9 +9,9 @@ const selectVariants = cva(
   {
     variants: {
       size: {
-        sm: "py-1 input-sm",
-        md: "py-2 input-md",
-        lg: "py-3 input-lg",
+        sm: "py-1 input-sm pr-2",
+        md: "py-2 input-md pr-2",
+        lg: "py-3 input-lg pr-3",
       },
     },
     defaultVariants: {
@@ -48,14 +48,14 @@ export const Select: React.FC<SelectProps> = ({
       >
         <SelectPrimitive.Value />
         <SelectPrimitive.Icon>
-          <ChevronDown className="w-5 h-5" />
+          <ChevronDown size={16} strokeWidth={1.5} />
         </SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
       <SelectPrimitive.Content>
         <SelectPrimitive.Viewport
           className={cn(
             "flex flex-col focus-outline gap-1",
-            "bg-background border border-gray-200 rounded-sm shadow-lg p-1"
+            "dropdown-menu"
             // "dark:bg-gray-950 dark:border-gray-800 dark:text-gray-100"
           )}
         >
@@ -64,17 +64,16 @@ export const Select: React.FC<SelectProps> = ({
               key={option.value}
               value={option.value}
               className={cn(
-                "flex gap-1 items-center justify-start px-2 py-1 text-sm text-gray-700 cursor-pointer outline-none rounded",
-                "hover:bg-gray-200"
+                "dropdown-item gap-2"
                 // "dark:hover:bg-gray-900 dark:focus:bg-gray-700 dark:text-gray-100"
               )}
             >
-              <span className="size-4 shrink-0">
+              <span className="size-4 shrink-0 -mt-1">
                 <SelectPrimitive.ItemIndicator>
-                  <Check className="size-4" />
+                  <Check size={16} strokeWidth={2} />
                 </SelectPrimitive.ItemIndicator>
               </span>
-              <SelectPrimitive.ItemText>
+              <SelectPrimitive.ItemText className="leading-6 block">
                 {option.label}
               </SelectPrimitive.ItemText>
             </SelectPrimitive.Item>

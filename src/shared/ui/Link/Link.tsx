@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
 
 interface LinkProps extends NextLinkProps {
@@ -5,6 +6,9 @@ interface LinkProps extends NextLinkProps {
   className?: string;
 }
 
-export const Link: React.FC<LinkProps> = (props: LinkProps) => (
-  <NextLink {...props} className={`focus-outline rounded ${props.className}`} />
+export const Link: React.FC<LinkProps> = ({
+  className,
+  ...props
+}: LinkProps) => (
+  <NextLink {...props} className={clsx("focus-outline rounded", className)} />
 );
